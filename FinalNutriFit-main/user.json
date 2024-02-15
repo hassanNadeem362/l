@@ -1,0 +1,39 @@
+{
+  "user": [
+    {
+      "Username": "Ajlal",
+      "email": "Ajlal@gmail.com",
+      "contact": "1122334455",
+      "password": "123456",
+      "id": 1
+    },
+    {
+      "Username": "Zain",
+      "email": "Zain@gmail.com",
+      "contact": "665544332211",
+      "password": "654321",
+      "id": 2
+    },
+    {
+      "Username": "zain",
+      "email": "zain@gmail.com",
+      "contact": "03206420453",
+      "password": "123456",
+      "id": 3
+    },
+    {
+      "Username": "umar",
+      "email": "umar@gmail.com",
+      "contact": "84849",
+      "password": "123456",
+      "id": 4
+    },
+    {
+      "Username": "Ali",
+      "email": "Ali@gmail.com",
+      "contact": "123456789",
+      "password": "123456789",
+      "id": 5
+    }
+  ]
+}
