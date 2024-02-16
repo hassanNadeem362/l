@@ -10,7 +10,7 @@ const upload = multer({ storage: storage });
 // User registration route
 router.post("/signup", regUser);
 // Nutritionist registration route
-router.post("/regNutritionist", upload.single('document'), regNutritionist);
+router.post("/regNutritionist", regNutritionist);
 router.post("/signin", loginUser);
 router.post("/loginWithGoogleUser", loginWithGoogleUser);
 router.put("/user-update", updateUserInfo);

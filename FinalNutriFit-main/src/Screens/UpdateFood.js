@@ -14,61 +14,22 @@ const UpdateFood = () => {
   const [foodDetails, setFoodDetails] = useState({});
   const { foodId } = useParams(); 
   const [fieldsToUpdate, setFieldsToUpdate] = useState({
-    id: '',
-    foodName: '',
-    description: '',
-    calories: '',
-    carbs: '',
-    fats: '',
-    protein: '',
-    cholesterol: '',
-    fiber: '',
-    sodium: '',
+    id:"",
+    foodName:"",
+    description:"",
+    calories:"",
+    carbs:"",
+    fats:"",
+    protein:"",
+    cholesterol:"",
+    fiber:"",
+    sodium:"",
   });
 
   // const { foodId } = useParams();
   const navigate = useNavigate();
 
   const role = localStorage.getItem("userRole");
-
-  // Function to fetch food information
-  // useEffect(() => {
-  //   const fetchFoodInfo = async () => {
-  //     try {
-  //       const response = await axios.get(
-  //         `http://localhost:5000/api/nutritionist/addedFoods`
-  //       );
-
-  //       if (Array.isArray(response.data.data) && response.data.data.length > 0) {
-  //         const food = response.data.data.find((item) => item._id === foodId);
-  //         if (food) {
-  //           setFieldsToUpdate({
-  //             foodName: food.foodName,
-  //             description: food.description,
-  //             calories: food.calories,
-  //             carbs: food.carbs,
-  //             fats: food.fats,
-  //             protein: food.protein,
-  //             cholesterol: food.cholesterol,
-  //             fiber: food.fiber,
-  //             sodium: food.sodium,
-  //             id: food._id,
-  //           });
-  //         } else {
-  //           console.error('Food not found');
-  //         }
-  //       } else {
-  //         console.error('No data or invalid response format');
-  //       }
-  //     } catch (error) {
-  //       console.error('Error fetching food information', error);
-  //     }
-  //   };
-
-  //   fetchFoodInfo();
-  // }, [foodId]);
-
-
 
   useEffect(() => {
     // Fetch food details using the foodId
@@ -87,7 +48,7 @@ const UpdateFood = () => {
       }
     };
   
-    fetchFoodDetails(); // Call the function to fetch food details
+    fetchFoodDetails(); 
   
   }, [foodId]);
 
@@ -102,22 +63,23 @@ const UpdateFood = () => {
         fieldsToUpdate,
         {
           headers: {
-            Authorization: `Bearer ${userInfo.token}`, // Include authentication token
+            Authorization: `Bearer ${userInfo.token}`,
           },
         }
       );
   
-      Cookies.set("userInfo", JSON.stringify(response.data.data));
-
-
-      toast.success("Profile updated successfully");
-      // Handle success or show a notification to the user
-      console.log("Profile updated successfully");
+      // Update the food details in state
+      setFoodDetails(response.data.data);
+  
+      // Show success toast notification
+      toast.success("Food details updated successfully");
     } catch (error) {
-      // Handle errors, show a notification, or redirect the user
-      console.error("Error updating profile:", error);
+      // Handle errors and show a toast notification
+      console.error("Error updating food details:", error);
+      toast.error("Failed to update food details. Please try again later.");
     }
   };
+  
   
 
   // Function to handle field changes
@@ -127,19 +89,6 @@ const UpdateFood = () => {
       [fieldName]: value,
     }));
   };
-
-  // Function to handle profile click
-  // const handleProfileClick = () => {
-  //   // Add logic to handle different user roles and navigate to the appropriate dashboard
-  // };
-  
-
-  // const handleFieldChange = (fieldName, value) => {
-  //   setFieldsToUpdate((prevFields) => ({
-  //     ...prevFields,
-  //     [fieldName]: value,
-  //   }));
-  // };
 
   const handleProfileClick = () => {
     if (role === 'admin') {

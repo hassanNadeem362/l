@@ -136,78 +136,22 @@ const Nutrafit = require("../models/nutraFit_User");
     };
 
   const updateFood = async (req, res) => {
-    try {
-      const { foodId } = req.params;
-
-      const food = await NutFood.findById(foodId);
-
-      if (!food) {
-        // Food not found
-        return res.status(404).json({ success: false, message: 'Food not found' });
-      }
-
-      // Extract fields from the request body
-      const {
-        foodName,
-        description,
-        calories,
-        carbs,
-        fats,
-        protein,
-        cholesterol,
-        fiber,
-        sodium,
-      } = req.body;
-
-      // Update food information based on the fields present in the request body
-      if (foodName) food.foodName = foodName;
-      if (description) food.description = description;
-      if (calories) food.calories = calories;
-      if (carbs) food.carbs = carbs;
-      if (fats) food.fats = fats;
-      if (protein) food.protein = protein;
-      if (cholesterol) food.cholesterol = cholesterol;
-      if (fiber) food.fiber = fiber;
-      if (sodium) food.sodium = sodium;
-
-      await food.save();
-
-      // Send a success response with the updated food data
-      res.status(200).json({
-        success: true,
-        message: 'Food updated successfully',
-        data: {
-          _id: food._id,
-          foodName: food.foodName,
-          description: food.description,
-          calories: food.calories,
-          carbs: food.carbs,
-          fats: food.fats,
-          protein: food.protein,
-          cholesterol: food.cholesterol,
-          fiber: food.fiber,
-          sodium: food.sodium,
-        },
-      });
-    } catch (err) {
-      // Handle server error
-      console.error('Error updating food:', err);
-      res.status(500).json({ success: false, message: 'Internal server error' });
+      try {
+        const { foodId } = req.params;
+        const { foodName, description, calories,  carbs,  fats,  protein, cholesterol, fiber, sodium} = req.body;
+        const updateNutFood = await NutFood.findByIdAndUpdate(foodId, { foodName, description, calories,  carbs,  fats,  protein, cholesterol, fiber, sodium}, { new: true })
+        if (!updateNutFood) {
+            return res.status(404).send("Event not found");
+        } else {
+            res.status(200).json(updateNutFood);
+        }
+    } catch (error) {
+        console.log(error)
     }
+
   };
 
-  //
-    // const addedFoods = async (req, res) => {
-    //   try {
-    //     // Fetch the list of added foods from the database
-    //     const foods = await NutFood.find({}); // Customize the fields you want to retrieve
-    
-    //     // Send the list of added foods as a response
-    //     sendResponse(res, 200, 200, "List of added foods", foods);
-    //   } catch (error) {
-    //     handleServerError(res, error);
-    //   }
-    // };
+  
     const addedFoods = async (req, res) => {
       try {
         // Fetch the list of added foods from the database

@@ -189,7 +189,7 @@ const regNutritionist = async (req, res) => {
         "This phone number already exists. Please use a different phone number."
       );
     } else {
-      const hashedPassword = bcrypt.hash(password, 10);
+      const hashedPassword = await bcrypt.hash(password, 10);
 
       const finalNutritionist = new Nutrafit({
         name,
