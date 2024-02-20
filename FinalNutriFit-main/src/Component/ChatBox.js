@@ -17,28 +17,7 @@ const ChatBox = () => {
   let currentUser = userData ? JSON.parse(userData) : null;
 
 
-  const fetchMessage = async () => {
-    try {
-      if (!chat) return;
-      const config = {
-        headers: {
-          "Content-type": "application/json",
-        },
-      };
-      const { data } = await axios.get(
-        `http://localhost:5000/api/message/${chat._id}`,
-        config
-      );
-      console.log("Fetched messages:", data);
-      setMessages(data);
-    } catch (error) {
-      console.log(error);
-    }
-  }
-
-  useEffect(() => {
-    fetchMessage()
-  }, [chat])
+ 
 
 
   const sendMessage = async () => {
@@ -63,6 +42,29 @@ const ChatBox = () => {
       console.log(error);
     }
   }
+
+  const fetchMessage = async () => {
+    try {
+      if (!chat) return;
+      const config = {
+        headers: {
+          "Content-type": "application/json",
+        },
+      };
+      const { data } = await axios.get(
+        `http://localhost:5000/api/message/${chat._id}`,
+        config
+      );
+      console.log("Fetched messages:", data);
+      setMessages(data);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  useEffect(() => {
+    fetchMessage()
+  }, [chat])
 
 
 

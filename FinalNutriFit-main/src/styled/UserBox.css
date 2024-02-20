@@ -63,8 +63,10 @@
     border-bottom: 1px solid #DCDCDC;
     height: 4rem;
     padding: 0 10px;
-    cursor: pointer;
-    
+    cursor: pointer; 
+}
+.UserBox_section>.Body__section>.Body_Item:hover{
+    background-color: #f3f3f3;
 }
 .UserBox_section>.Body__section>.Body_Item>.person_message{
     display: flex;

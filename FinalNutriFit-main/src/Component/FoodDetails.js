@@ -44,6 +44,7 @@ import AccountBoxIcon from "@mui/icons-material/AccountBox";
 import PersonIcon from "@mui/icons-material/Person";
 import Typewriter from "typewriter-effect";
 import { useNavigate } from "react-router-dom";
+import { IconButton } from "@mui/material";
 
 
 // Create a functional component for the details page
@@ -93,8 +94,8 @@ const FoodDetails = () => {
 
 
     // Fetch nutritionist details using the nutritionistId from the food response
-      const nutriInfo = async () => {
-        try {
+    const nutriInfo = async () => {
+      try {
         let user = Cookies.get("userInfo");
         const userInfo = user ? JSON.parse(user) : null;
         console.log(userInfo);
@@ -103,16 +104,16 @@ const FoodDetails = () => {
         );
         const userData = response.data.data;
         console.log(userData);
-        
+
         setNutritionistDetails(userData);
       } catch (error) {
         console.error("Error fetching favorite foods:", error);
       }
     }
-    
 
 
-    
+
+
 
     // Fetch user's favorite foods to check if the current food is a favorite
     const fetchFavFoods = async () => {
@@ -312,6 +313,12 @@ const FoodDetails = () => {
                   <td className="pr-4 font-semibold">Phone:</td>
                   <td>{foodDetails.nutritionistId.phone}</td>
                 </tr>
+                <tr>
+                  <td className="pr-4 font-semibold" onClick={() => navigate('/chat')} >
+                    Chat:
+                  </td>
+                  <td>Nutritionists</td>
+                </tr>
               </tbody>
             </table>
           )}
@@ -365,12 +372,11 @@ const DetailWrapper = styled.div`
         background: linear-gradient(90deg, rgba(161,238,147,1) 0%, rgba(156,255,161,1) 100%);
       color: green;
   }
-      ${
-        "" /* div {
+      ${"" /* div {
         width: 500px;
       height: auto;
   } */
-      }
+  }
   div img {
     width: 300px;
     height: auto;
