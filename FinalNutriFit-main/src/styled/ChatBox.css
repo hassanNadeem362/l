@@ -1,0 +1,67 @@
+.chatBox_section {
+    flex: 0.8;
+    background-color: #efeae2;
+    display: flex;
+    flex-direction: column;
+}
+.chatBox_section > .Header_section{
+    height: 10%;
+    background-color: #f0f2f5;
+    display: flex;
+    align-items: center;
+    padding: 0 10px;
+}
+.chatBox_section > .Header_section > .Header_item{
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+.chatBox_section > .Header_section > .Header_item > .Header_content{
+    display: flex;
+    flex-direction: column;
+   
+}
+.chatBox_section > .Header_section > .Header_item > .Header_content > p{
+    font-weight: 600;
+     font-size: 12px;
+}
+
+.chatBox_section > .Body_section{
+    height: 80%;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 10px;
+}
+.chatBox_section > .Body_section > .message {
+    width: fit-content;
+    padding: 15px;
+    font-family: sans-serif;
+}
+.chatBox_section > .Body_section > .me {
+    background-color: #25d366;
+    border-radius: 0 30px 30px 30px;
+    color: #fff;
+    align-self: flex-start;
+}
+.chatBox_section > .Body_section > .receiver{
+    background-color: #fff;
+    border-radius: 30px 0 30px 30px;
+    align-self: flex-end;
+}
+.chatBox_section > .chat_section{
+    height: 10%;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    background-color: #f0f2f5;
+    padding: 0 10px;
+}
+.chatBox_section > .chat_section > input{
+    width: 100%;
+    padding: 15px;
+    border-radius: 30px;
+    border: none;
+    outline: none;
+    font-size: 16px;
+}

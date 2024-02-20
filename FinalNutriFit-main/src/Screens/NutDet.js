@@ -137,24 +137,24 @@ const NutDet = () => {
               <td className="border px-4 py-2">{dash?.phone}</td>
             </tr>
             <tr>
-              <td className="border px-4 py-2 font-semibold">Document</td>
-              <td className="border px-4 py-2">
-                {dash && dash.document && (
-                  <iframe
-                    title="Document"
-                    src={`data:${dash.document.contentType};base64,${btoa(
-                      new Uint8Array(dash.document.data).reduce(
-                        (data, byte) => data + String.fromCharCode(byte),
-                        ''
-                      )
-                    )}`}
-                    width="100%"
-                    height="500px"
-                    frameBorder="0" // Change to frameBorder
-                  ></iframe>
-                )}
-              </td>
-            </tr>
+  <td className="border px-4 py-2 font-semibold">Document</td>
+  <td className="border px-4 py-2">
+    {dash && dash.document && (
+      <a
+        href={`data:${dash.document.contentType};base64,${btoa(
+          new Uint8Array(dash.document.data).reduce(
+            (data, byte) => data + String.fromCharCode(byte),
+            ''
+          )
+        )}`}
+        download="document"
+      >
+        Download Document
+      </a>
+    )}
+  </td>
+</tr>
+
           </tbody>
         </table>
         <SuggestedFoods nutritionistId={userId} />

@@ -1,0 +1,73 @@
+.UserBox_section {
+    flex: 0.2;
+    background-color: #f0f2f5;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.UserBox_section>.Header__section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 10px;
+    height: 10%;
+    border-right: 1px solid #DCDCDC;
+}
+
+.Header__section>.Header_Item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    cursor: pointer;
+}
+
+.UserBox_section>.Body__section {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    overflow-y: scroll;
+    scroll-behavior: smooth;
+    height: 80%;
+    border-right: 1px solid #DCDCDC;
+}
+
+.UserBox_section>.Search_section {
+    padding: 0 10px;
+    height: 10%;
+    display: flex;
+    align-items: center;
+    background-color: white;
+    border-bottom: 1px solid #DCDCDC;
+}
+
+.UserBox_section>.Search_section>.Search {
+    display: flex;
+    background-color: #f0f2f5;
+    border-radius: 30px;
+    padding: 5px;
+    width: 100%;
+}
+.UserBox_section>.Search_section>.Search> input{
+    background: none;
+    border: none;
+    outline: none;
+    padding: 0 10px;
+    width: 100%;
+}
+
+.UserBox_section>.Body__section>.Body_Item {
+    display: flex;
+    align-items: center;
+    background-color: #ffffff;
+    border-bottom: 1px solid #DCDCDC;
+    height: 4rem;
+    padding: 0 10px;
+    cursor: pointer;
+    
+}
+.UserBox_section>.Body__section>.Body_Item>.person_message{
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}

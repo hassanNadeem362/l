@@ -107,12 +107,7 @@ import Home from "./pages/Home";
 import Cuisine from "./pages/Cuisine";
 import Searched from "./pages/Searched";
 import UpdateUserInfo from "./Screens/updateUserInfo";
-
-
-
-
-
-
+import Chat from "./Screens/Chat";
 
 
 function App() {
@@ -273,6 +268,7 @@ function App() {
           <Route path="/cuisine/:type" element={<Cuisine />} />
           <Route path="/searched/:search" element={<Searched />} />
           <Route path="/" element={<Home />} />
+          <Route path="/chat" element={<Chat />} />
 
           {/* <Category />
           <Pages /> */}

@@ -302,15 +302,15 @@ const FoodDetails = () => {
               <tbody>
                 <tr>
                   <td className="pr-4 font-semibold">Name:</td>
-                  <td>{nutritionistDetails.name}</td>
+                  <td>{foodDetails.nutritionistId.name}</td>
                 </tr>
                 <tr>
                   <td className="pr-4 font-semibold">Email:</td>
-                  <td>{nutritionistDetails.email}</td>
+                  <td>{foodDetails.nutritionistId.email}</td>
                 </tr>
                 <tr>
                   <td className="pr-4 font-semibold">Phone:</td>
-                  <td>{nutritionistDetails.phone}</td>
+                  <td>{foodDetails.nutritionistId.phone}</td>
                 </tr>
               </tbody>
             </table>

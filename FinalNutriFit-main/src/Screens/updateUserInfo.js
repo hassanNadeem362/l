@@ -7,161 +7,46 @@ import PersonIcon from "@mui/icons-material/Person";
 import AccountBoxIcon from "@mui/icons-material/AccountBox";
 import { ToastContainer } from "react-toastify";
 import { toast } from "../Component/toastr/toaster.tsx";
-import { useParams } from "react-router-dom";
+import { useUserAuth } from "../context/UserAuthContext.js";
 const UpdateUserInfo = () => {
-  const [userInfo, setUserInfo] = useState({
-    fullName: "",
-    email: "",
-    phone: "",
-    gender: "",
-    dateOfBirth: "",
-    height: "",
-    currentWeight: "",
-    desiredWeight: "",
-    currentBody: "",
-    desiredBody: "",
-    ebwo: "",
-    stamina: "",
-    isExercise: false,
-    exercisePref: "",
-    dietaryPreferences: "",
-    foodAllergies: [],
-    proteinConsumption: [],
-    fatsConsumption: [],
-    dailyMealChoices: "",
-    dailyActivityLevel: "",
-    sleepTime: "",
-    wakeUpTime: "",
-    employmentStatus: "",
-    timeLeastActivity: "",
-    physicalScheduleActivity: "",
-  });
-  const { userId } = useParams();
+  const { nutrition } = useUserAuth();
+  const [userInfo, setUserInfo] = useState(nutrition); // Initialize with an empty object if nutrition is undefined
 
-  const role = localStorage.getItem("userRole");
+  console.log(userInfo);
+
+ 
   const navigate = useNavigate();
+
 
   useEffect(() => {
     const user = Cookies.get("userInfo");
     const userInfo = user ? JSON.parse(user) : null;
-    // Set initial state based on the user information
     if (userInfo) {
-      setUserInfo({
-        fullName: userInfo.fullName,
-        email: userInfo.email,
-        phone: userInfo.phone,
-        gender: userInfo.gender,
-        dateOfBirth: userInfo.dateOfBirth,
-        height: userInfo.height,
-        currentWeight: userInfo.currentWeight,
-        desiredWeight: userInfo.desiredWeight,
-        currentBody: userInfo.currentBody,
-        desiredBody: userInfo.desiredBody,
-        ebwo: userInfo.ebwo,
-        stamina: userInfo.stamina,
-        isExercise: userInfo.isExercise,
-        exercisePref: userInfo.exercisePref,
-        dietaryPreferences: userInfo.dietaryPreferences,
-        foodAllergies: userInfo.foodAllergies,
-        proteinConsumption: userInfo.proteinConsumption,
-        fatsConsumption: userInfo.fatsConsumption,
-        dailyMealChoices: userInfo.dailyMealChoices,
-        dailyActivityLevel: userInfo.dailyActivityLevel,
-        sleepTime: userInfo.sleepTime,
-        wakeUpTime: userInfo.wakeUpTime,
-        employmentStatus: userInfo.employmentStatus,
-        timeLeastActivity: userInfo.timeLeastActivity,
-        physicalScheduleActivity: userInfo.physicalScheduleActivity,
-      });
+      setUserInfo(userInfo);
     }
   }, []);
+  const role = localStorage.getItem("userRole");
+  // const handleSignOut = () => {
+  //   Cookies.remove("userInfo");
+  //   localStorage.removeItem("userRole");
+  //   navigate("/Login");
+  // };
 
-  //   useEffect(() => {
-  //     // Retrieve user information from cookies
-  //     const user = Cookies.get("userInfo");
-  //     const userInfo = user ? JSON.parse(user) : null;
-
-  //     // Set initial state based on user information
-  //     if (userInfo) {
-  //       setUserInfo({
-  //         ...userInfo,
-  //         id: userInfo._id,
-  //       });
-  //     }
-  //   }, []);
-
-  const handleSignOut = () => {
-    Cookies.remove("userInfo");
-    localStorage.removeItem("userRole");
-    navigate("/Login");
-  };
-
-  const handleChange = (fieldName, value) => {
-    setUserInfo((prevFields) => ({
-      ...prevFields,
-      [fieldName]: value,
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setUserInfo((prevUserInfo) => ({
+      ...prevUserInfo,
+      [name]: value,
     }));
-  };
-
-  const handleCheckboxChange = (fieldName, value) => {
-    setUserInfo((prevFields) => ({
-      ...prevFields,
-      [fieldName]: value,
-    }));
-  };
-
-  const handleArrayChange = (e) => {
-    setUserInfo({
-      ...userInfo,
-      [e.target.name]: e.target.value.split(",").map((item) => item.trim()),
-    });
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     try {
       const response = await axios.put(
-        `http://localhost:5000/api/auth/user-update/${userId}`,
-        {
-          fullName: userInfo.fullName,
-          email: userInfo.email,
-          phone: userInfo.phone,
-          gender: userInfo.gender,
-          dateOfBirth: userInfo.dateOfBirth,
-          height: userInfo.height,
-          currentWeight: userInfo.currentWeight,
-          desiredWeight: userInfo.desiredWeight,
-          currentBody: userInfo.currentBody,
-          desiredBody: userInfo.desiredBody,
-          ebwo: userInfo.ebwo,
-          isExercise: userInfo.isExercise,
-          exercisePref: userInfo.exercisePref,
-          dietaryPreferences: userInfo.dietaryPreferences,
-          foodAllergies: userInfo.foodAllergies,
-          proteinConsumption: userInfo.proteinConsumption,
-          fatsConsumption: userInfo.fatsConsumption,
-          dailyMealChoices: userInfo.dailyMealChoices,
-          dailyActivityLevel: userInfo.dailyActivityLevel,
-          sleepTime: userInfo.sleepTime,
-          wakeUpTime: userInfo.wakeUpTime,
-          employmentStatus: userInfo.employmentStatus,
-          timeLeastActivity: userInfo.timeLeastActivity,
-          physicalScheduleActivity: userInfo.physicalScheduleActivity,
-        },
-        {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("userToken")}`,
-          },
-        }
+        `http://localhost:5000/api/auth/user-update/${userInfo._id}`,
+        userInfo
       );
-
-      // Update the user information in state after a successful update
-      setUserInfo((prevUserInfo) => ({
-        ...prevUserInfo,
-        ...response.data.data,
-      }));
-
       toast.success("Profile updated successfully");
     } catch (error) {
       console.error("Error updating profile:", error);
@@ -182,8 +67,8 @@ const UpdateUserInfo = () => {
   return (
     <div>
       <nav className="bg-green-300 p-5">
-        <div className="max-w-7xl mx-auto flex flex-row justify-between items-center space-x-4">
-          <Link to={"/"} className="text-black text-3xl font-bold ">
+        <div className="max-w-7xl mx-auto flex flex-row justify-between  items-center space-x-4">
+          <Link to={"/"} class="text-black text-3xl font-bold ">
             <LocalDiningIcon fontSize="20px" /> NutriFit
           </Link>{" "}
           <div className="space-x-4 ml-4 ">
@@ -193,6 +78,7 @@ const UpdateUserInfo = () => {
             >
               Diets
             </Link>
+
             <Link
               to={"/Blogs"}
               className="text-black text-xl px-3 py-1 navbar-link"
@@ -206,27 +92,27 @@ const UpdateUserInfo = () => {
               About Us
             </Link>
           </div>
-          <div className="space-x-4">
+          {/* <div className="space-x-4">
             {!role ? (
-              <div className="space-x-4">
+              <div class="space-x-4">
                 <Link
                   to={"/Login"}
-                  className="text-black text-xl px-3 py-1 navbar-link"
+                  class="text-black text-xl px-3 py-1 navbar-link"
                 >
                   <PersonIcon /> Login
                 </Link>
                 <Link
                   to={"/UserSignUp"}
-                  className="text-black text-xl px-3 py-1 navbar-link"
+                  class="text-black text-xl px-3 py-1 navbar-link"
                 >
                   <AccountBoxIcon /> SignUp
                 </Link>
               </div>
             ) : (
-              <div className="space-x-4">
+              <div class="space-x-4">
                 <Link
                   to={"/Login"}
-                  className="text-black text-xl px-3 py-1 navbar-link"
+                  class="text-black text-xl px-3 py-1 navbar-link"
                 >
                   <button onClick={handleSignOut}>
                     <PersonIcon /> SignOut
@@ -234,17 +120,17 @@ const UpdateUserInfo = () => {
                 </Link>
               </div>
             )}
-          </div>
+          </div> */}
         </div>
       </nav>
       <ToastContainer />
       <div className="max-w-md flex gap-7 p-4 mx-auto bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 rounded-sm">
-        <button
-          onClick={handleProfileClick}
+        <Link
+          to="/UserPreferences"
           className="text-black text-xl p-1 rounded-xl"
         >
           🏠 Home
-        </button>
+        </Link>
       </div>
 
       <h1 className="text-center mb-4 text-3xl font-semibold underline">
@@ -275,7 +161,7 @@ const UpdateUserInfo = () => {
                         name="fullName"
                         value={userInfo.fullName}
                         onChange={(e) =>
-                          handleChange("fullName", e.target.value)
+                          handleChange(e)
                         }
                         className="form-input mt-1 block w-full rounded-md border-black shadow-sm"
                       />
@@ -288,7 +174,7 @@ const UpdateUserInfo = () => {
                         type="email"
                         name="email"
                         value={userInfo.email}
-                        onChange={(e) => handleChange("email", e.target.value)}
+                        onChange={(e) => handleChange(e)}
                         className="form-input mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
                       />
                     </label>
@@ -300,7 +186,7 @@ const UpdateUserInfo = () => {
                         type="text"
                         name="phone"
                         value={userInfo.phone}
-                        onChange={(e) => handleChange("phone", e.target.value)}
+                        onChange={(e) => handleChange(e)}
                         className="form-input mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
                       />
                     </label>
@@ -312,7 +198,7 @@ const UpdateUserInfo = () => {
                         type="text"
                         name="gender"
                         value={userInfo.gender}
-                        onChange={(e) => handleChange("gender", e.target.value)}
+                        onChange={(e) => handleChange(e)}
                         className="form-input mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
                       />
                     </label>
@@ -325,7 +211,7 @@ const UpdateUserInfo = () => {
                         name="dateOfBirth"
                         value={userInfo.dateOfBirth}
                         onChange={(e) =>
-                          handleChange("dateOfBirth", e.target.value)
+                          handleChange(e)
                         }
                         className="form-input mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
                       />
@@ -338,7 +224,7 @@ const UpdateUserInfo = () => {
                         type="text"
                         name="height"
                         value={userInfo.height}
-                        onChange={(e) => handleChange("height", e.target.value)}
+                        onChange={(e) => handleChange(e)}
                         className="form-input mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
                       />
                     </label>
@@ -351,7 +237,7 @@ const UpdateUserInfo = () => {
                         name="currentWeight"
                         value={userInfo.currentWeight}
                         onChange={(e) =>
-                          handleChange("currentWeight", e.target.value)
+                          handleChange(e)
                         }
                         className="form-input mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
                       />
@@ -365,7 +251,7 @@ const UpdateUserInfo = () => {
                         name="desiredWeight"
                         value={userInfo.desiredWeight}
                         onChange={(e) =>
-                          handleChange("desiredWeight", e.target.value)
+                          handleChange(e)
                         }
                         className="form-input mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
                       />
@@ -385,7 +271,7 @@ const UpdateUserInfo = () => {
                         name="healthGoal"
                         value={userInfo.healthGoal}
                         onChange={(e) =>
-                          handleChange("healthGoal", e.target.value)
+                          handleChange(e)
                         }
                         className="form-input mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
                       />
@@ -399,7 +285,7 @@ const UpdateUserInfo = () => {
                         name="exercisePref"
                         value={userInfo.exercisePref}
                         onChange={(e) =>
-                          handleChange("exercisePref", e.target.value)
+                          handleChange(e)
                         }
                         className="form-input mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
                       />
@@ -413,7 +299,7 @@ const UpdateUserInfo = () => {
                         name="dietaryPreferences"
                         value={userInfo.dietaryPreferences}
                         onChange={(e) =>
-                          handleChange("dietaryPreferences", e.target.value)
+                          handleChange(e)
                         }
                         className="form-input mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
                       />
@@ -433,7 +319,7 @@ const UpdateUserInfo = () => {
                         name="currentBody"
                         value={userInfo.currentBody}
                         onChange={(e) =>
-                          handleChange("currentBody", e.target.value)
+                          handleChange(e)
                         }
                         className="form-input mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
                       />
@@ -447,7 +333,7 @@ const UpdateUserInfo = () => {
                         name="desiredBody"
                         value={userInfo.desiredBody}
                         onChange={(e) =>
-                          handleChange("desiredBody", e.target.value)
+                          handleChange(e)
                         }
                         className="form-input mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
                       />
@@ -460,7 +346,7 @@ const UpdateUserInfo = () => {
                         type="text"
                         name="ebwo"
                         value={userInfo.ebwo}
-                        onChange={(e) => handleChange("ebwo", e.target.value)}
+                        onChange={(e) => handleChange(e)}
                         className="form-input mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
                       />
                     </label>
@@ -479,7 +365,7 @@ const UpdateUserInfo = () => {
                         name="dailyActivityLevel"
                         value={userInfo.dailyActivityLevel}
                         onChange={(e) =>
-                          handleChange("dailyActivityLevel", e.target.value)
+                          handleChange(e)
                         }
                         className="form-input mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
                       />
@@ -493,7 +379,7 @@ const UpdateUserInfo = () => {
                         name="dailyMealChoices"
                         value={userInfo.dailyMealChoices}
                         onChange={(e) =>
-                          handleChange("dailyMealChoices", e.target.value)
+                          handleChange(e)
                         }
                         className="form-input mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
                       />
@@ -507,7 +393,7 @@ const UpdateUserInfo = () => {
                         name="employmentStatus"
                         value={userInfo.employmentStatus}
                         onChange={(e) =>
-                          handleChange("employmentStatus", e.target.value)
+                          handleChange(e)
                         }
                         className="form-input mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
                       />
@@ -521,10 +407,7 @@ const UpdateUserInfo = () => {
                         name="physicalScheduleActivity"
                         value={userInfo.physicalScheduleActivity}
                         onChange={(e) =>
-                          handleChange(
-                            "physicalScheduleActivity",
-                            e.target.value
-                          )
+                          handleChange(e)
                         }
                         className="form-input mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
                       />
@@ -538,7 +421,7 @@ const UpdateUserInfo = () => {
                         name="sleepTime"
                         value={userInfo.sleepTime}
                         onChange={(e) =>
-                          handleChange("sleepTime", e.target.value)
+                          handleChange(e)
                         }
                         className="form-input mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
                       />
@@ -552,7 +435,7 @@ const UpdateUserInfo = () => {
                         name="wakeUpTime"
                         value={userInfo.wakeUpTime}
                         onChange={(e) =>
-                          handleChange("wakeUpTime", e.target.value)
+                          handleChange(e)
                         }
                         className="form-input mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
                       />

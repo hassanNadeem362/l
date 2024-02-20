@@ -22,23 +22,20 @@ const Dashboard = () => {
   const [calories, setCalories] = useState(0);
   const navigate = useNavigate();
 
-
-
-    const role = localStorage.getItem("userRole");
-      const handleProfileClick = () => {
-        if (role === "admin") {
-          // Redirect to admin dashboard
-          navigate("/AdminDashboard");
-        } else if (role === "nutritionist") {
-          // Redirect to nutritionist dashboard
-          navigate("/NutritionistDashboard");
-        } else if (role === "customer") {
-          // Handle other roles or scenarios as needed
-          // Redirect to a default dashboard or show an error message
-          navigate("/Dashboard");
-        }
-      };
-
+  const role = localStorage.getItem("userRole");
+  const handleProfileClick = () => {
+    if (role === "admin") {
+      // Redirect to admin dashboard
+      navigate("/AdminDashboard");
+    } else if (role === "nutritionist") {
+      // Redirect to nutritionist dashboard
+      navigate("/NutritionistDashboard");
+    } else if (role === "customer") {
+      // Handle other roles or scenarios as needed
+      // Redirect to a default dashboard or show an error message
+      navigate("/Dashboard");
+    }
+  };
 
   let user = Cookies.get("userInfo");
   const userInfo = user ? JSON.parse(user) : null;
@@ -273,19 +270,19 @@ const Dashboard = () => {
 
       <div className="max-w-3xl flex gap-7 p-4 mx-auto bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 rounded-sm">
         <Link to={"/Dashboard"} className="text-white">
-          Home
+          🏠 Home
         </Link>
         <button onClick={handleAddFood} className=" text-white">
-          Food
+          🥗 Food
         </button>
         <button onClick={handleAddExercise} className=" text-white">
-          Exercise
+          🏋️‍♂️ Exercise
         </button>
         <Link to={"/UserPreferences"} className="text-white">
-          User Preferences
+          👤 User Preferences
         </Link>
         <Link to={"/update"} className="text-white">
-          Update Profile
+          🔄 Update Profile
         </Link>
       </div>
       <div className="max-w-3xl mx-auto p-8 rounded-md">

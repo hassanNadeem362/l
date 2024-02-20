@@ -304,7 +304,9 @@ const loginWithGoogleUser = async (req, res) => {
   }
 };
 
-const updateUserInfo = async (req, res) => {
+
+//user info
+const userInfo = async (req, res) => {
   const userId = req.body.id; // Assuming you have middleware to extract user information from the request
 
   try {
@@ -349,8 +351,8 @@ const updateUserInfo = async (req, res) => {
     if (gender) user.gender = gender;
     if (dateOfBirth) user.dateOfBirth = dateOfBirth;
     if (inches && heightFeet) user.height = `${heightFeet}.${inches} ft`;
-    if (currentWeight) user.currentWeight = `${currentWeight} kg`;
-    if (desiredWeight) user.desiredWeight = `${desiredWeight} kg`;
+    if (currentWeight ) user.currentWeight = `${currentWeight} kg`;
+    if (desiredWeight ) user.desiredWeight = `${desiredWeight} kg`;
     if (currentBody) user.currentBody = currentBody;
     if (desiredBody) user.desiredBody = desiredBody;
     if (ebwo) user.ebwo = ebwo;
@@ -363,10 +365,10 @@ const updateUserInfo = async (req, res) => {
     if (fatsConsumption) user.fatsConsumption = fatsConsumption;
     if (dailyMealChoices) user.dailyMealChoices = dailyMealChoices;
     if (dailyActivityLevel) user.dailyActivityLevel = dailyActivityLevel;
-    if (wakeUpTime && wakeUpTime) {
-      user.wakeUpTime = wakeUpTime;
-      user.sleepTime = sleepTime;
-    }
+    if (wakeUpTime && wakeUpTime){
+     user.wakeUpTime = wakeUpTime;
+     user.sleepTime = sleepTime;
+    } 
     if (employmentStatus) user.employmentStatus = employmentStatus;
     if (timeLeastActivity) user.timeLeastActivity = timeLeastActivity;
     if (physicalScheduleActivity) user.physicalScheduleActivity = physicalScheduleActivity;
@@ -378,6 +380,41 @@ const updateUserInfo = async (req, res) => {
     handleServerError(res, err);
   }
 };
+
+
+
+
+
+
+
+const updateUserInfo = async (req, res) => {
+  try {
+    const userId = req.params.userId;
+    const updateFields = req.body;
+
+    const user = await Nutrafit.findByIdAndUpdate(userId, updateFields, { new: true });
+
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+
+    res.status(200).json(user);
+  } catch (err) {
+    console.error('Error updating user information:', err);
+    res.status(500).json({ message: 'Internal server error' });
+  }
+};
+
+
+
+const getNutrafits = async (req, res) => {
+  try {
+    
+  } catch (error) {
+    console.log(error)
+  }
+}
+
 const getUserInfo = async (req, res) => {
   const userId = req.params.userId;
 
@@ -387,9 +424,6 @@ const getUserInfo = async (req, res) => {
     if (!user) {
       return sendResponse(res, 404, 404, "User not found");
     }
-
-
-
     handleSuccess(res, 200, "User information retrieved successfully", user);
   } catch (err) {
     handleServerError(res, err);
@@ -546,6 +580,7 @@ module.exports = {
   regUser,
   loginUser,
   loginWithGoogleUser,
+  userInfo,
   getUserInfo,
   updateUserInfo,
   updateProfile,

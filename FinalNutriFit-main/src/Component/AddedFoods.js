@@ -121,8 +121,7 @@ const AddedFoods = () => {
                         };base64,${arrayBufferToBase64(food.image.data.data)}`}
                         alt={food.foodName}
                         fluid
-                        // width={"300px"}
-                        // height={"300px"}
+                        className="w-full h-40 object-cover"
                         onClick={() => handleCardClick(food._id)}
                       />
                     </div>

@@ -1,40 +1,31 @@
-import React from 'react'
+import React from "react";
 import UserChoice from "../Component/UserForm.js";
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from "react-router-dom";
 import AccountBoxIcon from "@mui/icons-material/AccountBox";
 import LocalDiningIcon from "@mui/icons-material/LocalDining";
 import Cookies from "js-cookie";
-import {  useState } from "react";
-
-
-
+import { useState } from "react";
 
 const UserPreferences = () => {
+  const [totalCalories, setTotalCalories] = useState(0);
 
+  let user = Cookies.get("userInfo");
 
-      const [totalCalories, setTotalCalories] = useState(0);
+  const navigate = useNavigate();
 
-        let user = Cookies.get("userInfo");
+  const handleAddFood = () => {
+    setTotalCalories((prevTotalCalories) => prevTotalCalories + 100);
+    navigate("/food");
+  };
 
+  const handleAddExercise = () => {
+    navigate("/AddExercise");
+  };
 
-      const navigate = useNavigate();
-
-
-    const handleAddFood = () => {
-      setTotalCalories((prevTotalCalories) => prevTotalCalories + 100);
-      navigate("/food");
-    };
-
-
-     const handleAddExercise = () => {
-       navigate("/AddExercise");
-     };
-
-     const handleSignOut = () => {
-       Cookies.remove("userInfo");
-       navigate("/UserSignUp");
-     };
-
+  const handleSignOut = () => {
+    Cookies.remove("userInfo");
+    navigate("/UserSignUp");
+  };
 
   return (
     <>
@@ -77,16 +68,16 @@ const UserPreferences = () => {
 
       <div className="max-w-3xl flex gap-7 p-4 mx-auto bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 rounded-sm">
         <Link to={"/Dashboard"} className="text-white">
-          Home
+          🏠 Home
         </Link>
         <button onClick={handleAddFood} className=" text-white">
-          Food
+          🥗 Food
         </button>
         <button onClick={handleAddExercise} className=" text-white">
-          Exercise
+          🏋️‍♂️ Exercise
         </button>
         <Link to={"/UserPreferences"} className="text-white">
-          User Preferences
+          👤 User Preferences
         </Link>
       </div>
 
@@ -95,6 +86,6 @@ const UserPreferences = () => {
       </div>
     </>
   );
-}
+};
 
-export default UserPreferences
+export default UserPreferences;

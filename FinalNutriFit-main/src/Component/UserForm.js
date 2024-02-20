@@ -7,6 +7,7 @@ import { MdHealthAndSafety } from "react-icons/md";
 import { IoBody } from "react-icons/io5";
 import { GiChoice } from "react-icons/gi";
 import { Link, useNavigate } from "react-router-dom";
+import { useUserAuth } from "../context/UserAuthContext";
 
 const UserChoice = () => {
   const user = Cookies.get("userInfo");
@@ -15,8 +16,9 @@ const UserChoice = () => {
   const [isEditModalOpen, setEditModalOpen] = useState(false);
   const [editedData, setEditedData] = useState({});
 
+  const role = localStorage.getItem("userRole");
 
-    const role = localStorage.getItem("userRole");
+  const { setNutrition } = useUserAuth();
 
   const navigate = useNavigate();
   useEffect(() => {
@@ -27,6 +29,7 @@ const UserChoice = () => {
           `http://localhost:5000/api/auth/${userId}`
         );
         setData(response.data.data);
+        setNutrition(response.data.data);
       } catch (error) {
         console.error("Error fetching data:", error);
       }
@@ -69,33 +72,29 @@ const UserChoice = () => {
 
   const handleProfileClick = () => {
     if (role === "admin") {
-      // Redirect to admin dashboard
       navigate("/AdminDashboard");
     } else if (role === "nutritionist") {
-      // Redirect to nutritionist dashboard
       navigate("/NutritionistDashboard");
     } else if (role === "customer") {
-      // Handle other roles or scenarios as needed
-      // Redirect to a default dashboard or show an error message
       navigate("/Dashboard");
     }
   };
 
   return (
     <>
-      <div className="w-3/5 p-4 mx-auto bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 rounded-sm flex gap-7">
-        <button
+      <div className="w-6/12 p-4 mx-auto bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 rounded-sm flex gap-7">
+        {/* <button
           onClick={handleProfileClick}
           className="text-black text-xl p-1 rounded-xl shadow-lg"
         >
           🏠 Home
-        </button>
+        </button> */}
 
         <Link
           to={"/updateUserInfo"}
           className="text-black text-xl p-1 rounded-xl shadow-lg"
         >
-          ✎ Edit
+          ✎ Edit Preferences
         </Link>
       </div>
 

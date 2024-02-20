@@ -155,7 +155,10 @@ const Nutrafit = require("../models/nutraFit_User");
     const addedFoods = async (req, res) => {
       try {
         // Fetch the list of added foods from the database
-        const foods = await NutFood.find({}); // Customize the fields you want to retrieve
+        const foods = await NutFood.find({}).populate(
+          "nutritionistId",
+          "name email phone role"
+        ); // Customize the fields you want to retrieve
         console.log("🚀 ~ addedFoods ~ foods:", foods)
 
         sendResponse(res, 200, 200, "List of added foods", foods);

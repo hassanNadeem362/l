@@ -11,6 +11,8 @@ import PersonIcon from "@mui/icons-material/Person";
 import styled from "styled-components";
 import { Splide, SplideSlide } from "@splidejs/react-splide";
 import SuggestedFoods from "../Component/SuggestedFoods";
+import { IconButton } from "@mui/material";
+import ChatIcon from '@mui/icons-material/Chat';
 
 const NutritionistDashboard = () => {
   const [nutritionists, setNutritionists] = useState([]);
@@ -96,6 +98,9 @@ const NutritionistDashboard = () => {
   const profile = () => {
     navigate("/update");
   };
+  const chatBoad = () => {
+    navigate("/chat")
+  }
   const addFood = () => {
     navigate("/AddFoodNut");
   };
@@ -188,6 +193,15 @@ const NutritionistDashboard = () => {
           className="text-white hover:text-gray-100 focus:outline-none"
         >
           🔄 Update Profile
+        </button>
+        <button
+          onClick={chatBoad}
+          className="text-white hover:text-gray-100 focus:outline-none"
+        >
+          <IconButton>
+            <ChatIcon />
+          </IconButton>
+          Chat
         </button>
       </div>
 

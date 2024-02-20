@@ -54,8 +54,12 @@ const userSchema = new mongoose.Schema({
   },
 
   // New fields added to the schema
-  fullName: String,
-  healthGoal: String,
+  fullName: {
+    type: String,
+  },
+  healthGoal: {
+    type: String,
+  },
   gender: {
     type: String,
     default: "male",
@@ -64,13 +68,13 @@ const userSchema = new mongoose.Schema({
   dateOfBirth: {
     type: Date,
   },
-  height: String,
-  currentWeight: String,
-  desiredWeight: String,
-  currentBody: String,
-  desiredBody: String,
-  ebwo: String,
-  stamina: String,
+  height: { type: String },
+  currentWeight: { type: String },
+  desiredWeight: { type: String },
+  currentBody: { type: String },
+  desiredBody: { type: String },
+  ebwo: { type: String },
+  stamina: { type: String },
   isExercise: {
     type: Boolean,
     default: false,
@@ -100,8 +104,8 @@ const userSchema = new mongoose.Schema({
     type: String,
     enum: ["Sedentary", "Light Active", "Moderately Active", "Very Active", "Extremely Active"],
   },
-  sleepTime: String,
-  wakeUpTime: String,
+  sleepTime: { type: String },
+  wakeUpTime: { type: String },
   employmentStatus: {
     type: String,
     enum: ["Office Job", "Self Employed"],

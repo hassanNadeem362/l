@@ -93,9 +93,8 @@ const AdminSignUP = () => {
 
     requiredFields.forEach((field) => {
       if (!nutritionist[field]) {
-        newValidationErrors[field] = `${
-          field.charAt(0).toUpperCase() + field.slice(1)
-        } is required.`;
+        newValidationErrors[field] = `${field.charAt(0).toUpperCase() + field.slice(1)
+          } is required.`;
         isValid = false;
       }
     });
@@ -105,20 +104,65 @@ const AdminSignUP = () => {
       return;
     }
 
+    //   try {
+    //     const { password, ...formDataWithoutPassword } = nutritionist;
+    //     const formData = new FormData();
+    //     Object.entries(nutritionist).forEach(([key, value]) => {
+    //       if (key === "document") {
+    //         // Append the file to FormData
+    //         formData.append(key, value);
+    //       } else {
+    //         formData.append(key, value);
+    //       }
+    //     });
+
+    //     console.log("formData:", formData);
+
+    //     const response = await axios.post(
+    //       "http://localhost:5000/api/auth/regNutritionist",
+    //       formData,
+    //       {
+    //         headers: {
+    //           "Content-Type": "multipart/form-data",
+    //         },
+    //       }
+    //     );
+
+    //     if (response.data.status === 200) {
+    //       toast.success(response.data.statusMessage);
+    //       Cookies.set("userInfo", JSON.stringify(response.data.data));
+    //       setTimeout(() => {
+    //         navigate("/NutritionistDashboard");
+    //       }, 3000);
+    //     } else if (response.data.status === 422) {
+    //       toast.warning(response.data.statusMessage);
+    //     } else {
+    //       toast.error(response.data.statusMessage);
+    //     }
+    //   } catch (err) {
+    //     setError(err.message);
+    //   }
+    // };
+    
     try {
       const { password, ...formDataWithoutPassword } = nutritionist;
       const formData = new FormData();
-      Object.entries(nutritionist).forEach(([key, value]) => {
-        if (key === "document") {
-          // Append the file to FormData
-          formData.append(key, value);
-        } else {
-          formData.append(key, value);
+    
+      // Iterate over the nutritionist object
+      for (const [key, value] of Object.entries(nutritionist)) {
+        // Check if the value is not undefined or null
+        if (value !== undefined && value !== null) {
+          // Append the file to FormData if the key is 'document'
+          if (key === "document") {
+            formData.append(key, value);
+          } else {
+            formData.append(key, value);
+          }
         }
-      });
-
+      }
+    
       console.log("formData:", formData);
-
+    
       const response = await axios.post(
         "http://localhost:5000/api/auth/regNutritionist",
         formData,
@@ -128,22 +172,24 @@ const AdminSignUP = () => {
           },
         }
       );
-
       if (response.data.status === 200) {
-        toast.success(response.data.statusMessage);
-        Cookies.set("userInfo", JSON.stringify(response.data.data));
-        setTimeout(() => {
-          navigate("/NutritionistDashboard");
-        }, 3000);
-      } else if (response.data.status === 422) {
-        toast.warning(response.data.statusMessage);
-      } else {
-        toast.error(response.data.statusMessage);
-      }
+              toast.success(response.data.statusMessage);
+              Cookies.set("userInfo", JSON.stringify(response.data.data));
+              setTimeout(() => {
+                navigate("/NutritionistDashboard");
+              }, 3000);
+            } else if (response.data.status === 422) {
+              toast.warning(response.data.statusMessage);
+            } else {
+              toast.error(response.data.statusMessage);
+            }
+    
+      // Rest of your code...
     } catch (err) {
       setError(err.message);
     }
   };
+    
 
   return (
     <div className="flex flex-row">

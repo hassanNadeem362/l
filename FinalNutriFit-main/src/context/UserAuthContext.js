@@ -11,6 +11,7 @@ const userAuthContext = createContext();
 
 export function UserAuthContextProvider({ children }) {
     const [user, setUser] = useState({});
+    const [nutrition, setNutrition] = useState({});
 
     function logIn(email, password) {
         return signInWithEmailAndPassword(auth, email, password);
@@ -18,25 +19,10 @@ export function UserAuthContextProvider({ children }) {
     function signUp(name, email, contact, password) {
         return createUserWithEmailAndPassword(auth, email, password);
     }
-    // function logOut() {
-    //     return signOut(auth);
-    // }
-    
-
-    // useEffect(() => {
-    //     const unsubscribe = onAuthStateChanged(auth, (currentuser) => {
-    //         console.log("Auth", currentuser);
-    //         setUser(currentuser);
-    //     });
-
-    //     return () => {
-    //         unsubscribe();
-    //     };
-    // }, []);
 
     return (
         <userAuthContext.Provider
-            value={{ user, logIn, signUp }}
+            value={{ user, logIn, signUp, nutrition, setNutrition }}
         >
             {children}
         </userAuthContext.Provider>

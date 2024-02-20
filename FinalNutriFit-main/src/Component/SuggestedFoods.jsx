@@ -90,20 +90,22 @@ const SuggestedFoods = ({ nutritionistId }) => {
                   <h3>{food.foodName}</h3>
                   <p>{food.description}</p>
                   <div
-                    className="delete-icon"
+                    className="delete-icon bg-red-400 text-black max-w-min p-2 mb-3 border-{10px}"
                     onClick={() => handleDeleteFood(food._id)}
                   >
                     Delete
                   </div>
-                </div>
-              </Card>
-              <Link
+                  <Link
                 to={`/updateFood/${food._id}`}
                 onClick={() => updateFood(food._id)}
-                className="text-black focus:outline-none"
+                className="text-black bg-green-300 p-3"
               >
-                Update Food
-              </Link>
+                Edit Food
+                  </Link>
+                  
+                </div>
+              </Card>
+              
             </SplideSlide>
           ))}
         </Splide>
