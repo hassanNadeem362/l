@@ -5,6 +5,7 @@ import "../styled/ChatBox.css";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
+import Cookies from "js-cookie";
 
 const ChatBox = () => {
   const { user, chat } = useSelector((state) => state.chat);
@@ -12,30 +13,8 @@ const ChatBox = () => {
   const [messages, setMessages] = useState([]);
   console.log(message)
 
-  const sendMessage = async () => {
-    try {
-      const config = {
-        headers: {
-          "Content-type": "application/json"
-        },
-      };
-      const { data } = await axios.post(
-        "http://localhost:5000/api/message",
-        {
-          senderId: "65cf1a3a7b6e8fdad7a02bc5",
-          content: message,
-          chatId: chat._id,
-        },
-        config
-      );
-      console.log(data)
-      setMessage("");
-    } catch (error) {
-      console.log(error);
-    }
-  }
-
-
+  const userData = Cookies.get("userInfo");
+  let currentUser = userData ? JSON.parse(userData) : null;
 
 
   const fetchMessage = async () => {
@@ -60,6 +39,32 @@ const ChatBox = () => {
   useEffect(() => {
     fetchMessage()
   }, [chat])
+
+
+  const sendMessage = async () => {
+    try {
+      const config = {
+        headers: {
+          "Content-type": "application/json"
+        },
+      };
+      const { data } = await axios.post(
+        "http://localhost:5000/api/message",
+        {
+          senderId: currentUser._id,
+          content: message,
+          chatId: chat._id,
+        },
+        config
+      );
+      console.log(data)
+      setMessage("");
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+
 
 
   return (
@@ -87,7 +92,7 @@ const ChatBox = () => {
           <div className="Body_section">
             {messages.map((message, index) => (
               message.chat.users.includes(user._id) && (
-                <div className={`message ${message.sender._id === user._id ? 'me' : 'receiver'}`} key={index}>
+                <div className={`message ${message.sender._id === currentUser._id ? 'me' : 'receiver'}`} key={index}>
                   {message.content}
                 </div>
               )

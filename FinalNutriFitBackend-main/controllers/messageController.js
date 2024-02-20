@@ -1,13 +1,13 @@
 const Message = require("../models/MessageModel");
 const Chat = require("../models/chatModel");
-const User = require("../models/userModel");
+const Nutrafit = require("../models/nutraFit_User");
 
 const sendMessage = async (req, res) => {
 
   try {
     const { senderId, content, chatId } = req.body;
     
-    const senderExists = await User.exists({ _id: senderId });
+    const senderExists = await Nutrafit.exists({ _id: senderId });
     if (!senderExists) {
       return res.status(404).json({ error: "Sender does not exist" });
     }

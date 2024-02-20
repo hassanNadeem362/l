@@ -247,14 +247,14 @@ const loginUser = async (req, res) => {
     let token; // Define the token variable here
 
     if (valEmail.email === "admin@gmail.com" && valEmail.password === "admin123") {
-      token = signInToken(valEmail); // Assign token value if admin user
+      token = signInToken(valEmail); 
     } else {
       const comparePassword = await bcrypt.compare(password, valEmail.password)
       if (comparePassword) {
-        token = signInToken(valEmail); // Assign token value if regular user
+        token = signInToken(valEmail); 
       } else {
         sendResponse(res, 200, 422, "Password invalid");
-        return; // Return early after sending response
+        return; 
       }
     }
 
@@ -273,6 +273,21 @@ const loginUser = async (req, res) => {
     handleServerError(res, err);
   }
 };
+
+
+const fetchAllUsers = async (req, res) => {
+  try {
+    const users = await Nutrafit.find({}); // Fetch all users
+    res.status(200).json({ users }); // Send the users as JSON response
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ error: 'Internal Server Error' }); // Handle error response
+  }
+}
+
+module.exports = fetchAllUsers;
+
+
 
 
 
@@ -351,8 +366,8 @@ const userInfo = async (req, res) => {
     if (gender) user.gender = gender;
     if (dateOfBirth) user.dateOfBirth = dateOfBirth;
     if (inches && heightFeet) user.height = `${heightFeet}.${inches} ft`;
-    if (currentWeight ) user.currentWeight = `${currentWeight} kg`;
-    if (desiredWeight ) user.desiredWeight = `${desiredWeight} kg`;
+    if (currentWeight) user.currentWeight = `${currentWeight} kg`;
+    if (desiredWeight) user.desiredWeight = `${desiredWeight} kg`;
     if (currentBody) user.currentBody = currentBody;
     if (desiredBody) user.desiredBody = desiredBody;
     if (ebwo) user.ebwo = ebwo;
@@ -365,10 +380,10 @@ const userInfo = async (req, res) => {
     if (fatsConsumption) user.fatsConsumption = fatsConsumption;
     if (dailyMealChoices) user.dailyMealChoices = dailyMealChoices;
     if (dailyActivityLevel) user.dailyActivityLevel = dailyActivityLevel;
-    if (wakeUpTime && wakeUpTime){
-     user.wakeUpTime = wakeUpTime;
-     user.sleepTime = sleepTime;
-    } 
+    if (wakeUpTime && wakeUpTime) {
+      user.wakeUpTime = wakeUpTime;
+      user.sleepTime = sleepTime;
+    }
     if (employmentStatus) user.employmentStatus = employmentStatus;
     if (timeLeastActivity) user.timeLeastActivity = timeLeastActivity;
     if (physicalScheduleActivity) user.physicalScheduleActivity = physicalScheduleActivity;
@@ -409,7 +424,7 @@ const updateUserInfo = async (req, res) => {
 
 const getNutrafits = async (req, res) => {
   try {
-    
+
   } catch (error) {
     console.log(error)
   }
@@ -585,6 +600,7 @@ module.exports = {
   updateUserInfo,
   updateProfile,
   regNutritionist,
+  fetchAllUsers
 };
 
 

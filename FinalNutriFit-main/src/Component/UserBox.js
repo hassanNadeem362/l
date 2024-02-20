@@ -8,17 +8,21 @@ import SearchIcon from '@mui/icons-material/Search';
 import axios from "axios";
 import { useDispatch} from 'react-redux';
 import { chatUser, storeChat } from '../store/chatSlice';
+import Cookies from "js-cookie";
 
 const UserBox = () => {
   const [userData, setUser] = useState([]);
   const [search, setSearch] = useState("");
   const dispatch = useDispatch();
 
+  let user = Cookies.get("userInfo");
+  let currentUser = user ? JSON.parse(user) : null;
 
+  console.log("Cookies"+user)
 
   const fetchUser = async () => {
     try {
-      const { data } = await axios.get("http://localhost:5000/api/user/fetch-user-All");
+      const { data } = await axios.get("http://localhost:5000/api/auth/fetchAllUsers");
       setUser(data.users);
     } catch (error) {
       console.log(error);
@@ -32,9 +36,9 @@ const UserBox = () => {
           "Content-type": "application/json"
         },
       };
-      const currentUser = "65cf1a517b6e8fdad7a02bc8";
+  
       const data = {
-        currentUser: currentUser,
+        currentUser: currentUser._id,
         userId: userId
       };
       await axios.post(`http://localhost:5000/api/chat`, data, config);
@@ -52,9 +56,9 @@ const UserBox = () => {
           "Content-type": "application/json"
         },
       };
-      const currentUser = "65cf1a517b6e8fdad7a02bc8"; 
+     
       const data = {
-        currentUser: currentUser,
+        currentUser: currentUser._id,
         userId: userId
       };
       const { data: chatData } = await axios.post(`http://localhost:5000/api/chat`, data, config);
@@ -68,9 +72,18 @@ const UserBox = () => {
     fetchUser();
   }, []);
 
-  const filteredUsers = userData.filter((item) =>
-    item.name.toLowerCase().includes(search.toLowerCase())
-  );
+  const filteredUsers = userData.filter((item) => {
+    const nameCondition = item.name.toLowerCase().includes(search.toLowerCase());
+    let roleCondition;
+    if (currentUser && currentUser.role === "nutritionist") {
+        roleCondition = item.role !== "nutritionist" && item.role !== "admin";
+    } else {
+        roleCondition = item.role === "nutritionist";
+    }
+    return nameCondition && roleCondition;
+});
+
+
 
   const userChat = (value) => {
     dispatch(chatUser(value));
@@ -85,7 +98,9 @@ const UserBox = () => {
           <IconButton>
             <Avatar>N</Avatar>
           </IconButton>
-          <Typography component="p">Ali</Typography>
+          <Typography component="p">
+            {currentUser.name}
+          </Typography>
         </Box>
         <Box>
           <IconButton>

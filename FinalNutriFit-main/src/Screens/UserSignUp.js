@@ -35,64 +35,7 @@ const UserSignUP = () => {
   const navigate = useNavigate();
   const role = localStorage.getItem("userRole");
   
-
-  // const handleChange = (e) => {
-  //   if (e.target.id === "phone") {
-  //     setUser({
-  //       ...user,
-  //       [e.target.id]: e,
-  //     });
-      
-  //     setUser({
-  //       ...user,
-  //       [e.target.id]: e.target.value,
-  //     });
-  //   }
-
-  //   // Clear validation error for the current field
-  //   setValidationErrors({
-  //     ...validationErrors,
-  //     [e.target.id]: "",
-  //   });
-
-  //   // Additional Validations
-  //   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  //   const passwordRegex =
-  //     /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
-  //   const phoneRegex = /^\d{10}$/;
-
-  //   switch (e.target.id) {
-  //     case "email":
-  //       if (!emailRegex.test(e.target.value)) {
-  //         setValidationErrors({
-  //           ...validationErrors,
-  //           [e.target.id]: "Enter a valid email address.",
-  //         });
-  //       }
-  //       break;
-  //     case "password":
-  //       if (!passwordRegex.test(e.target.value)) {
-  //         setValidationErrors({
-  //           ...validationErrors,
-  //           [e.target.id]:
-  //             "Password must be at least 8 characters long and include uppercase, lowercase, numbers, and special characters.",
-  //         });
-  //       }
-  //       break;
-  //     case "phone":
-  //       if (!phoneRegex.test(e.target.value)) {
-  //         setValidationErrors({
-  //           ...validationErrors,
-  //           [e.target.id]: "Enter a valid 11-digit phone number.",
-  //         });
-  //       }
-  //       break;
-  //     default:
-  //       break;
-  //   }
-  // };
-
-
+  
   const handleChange = (e) => {
     if (e.target.id === "phone") {
       setUser({
