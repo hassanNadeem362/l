@@ -208,7 +208,7 @@ const NutritionistDashboard = () => {
       {!usersView && dash && (
         <div className="mt-8 text-center">
           <h1 className="text-4xl font-bold text-gray-800">
-            Nutritionist Dashboard
+            Dashboard
           </h1>
           <NutritionistDetails dash={dash} />
         </div>

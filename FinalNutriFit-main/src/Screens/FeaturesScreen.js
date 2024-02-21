@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Search from "../Component/Search";
-import Category from '../Component/Category';
+import Category from "../Component/Category";
 import LocalDiningIcon from "@mui/icons-material/LocalDining";
 import Typewriter from "typewriter-effect";
 import AccountBoxIcon from "@mui/icons-material/AccountBox";
@@ -13,18 +13,13 @@ import Home from "../pages/Home";
 import Pages from "../pages/Pages";
 
 const FeaturesScreen = () => {
-  const navigate=useNavigate()
-  const role=  localStorage.getItem("userRole");
+  const navigate = useNavigate();
+  const role = localStorage.getItem("userRole");
   const handleSignOut = () => {
     Cookies.remove("userInfo");
     localStorage.removeItem("userRole");
     navigate("/Login");
   };
-
- 
- 
-
-
 
   const handleProfileClick = () => {
     if (role === "admin") {
@@ -144,6 +139,27 @@ const FeaturesScreen = () => {
 
       <Search />
       <Home />
+
+      <div className="bg-green-300 text-black py-8">
+        <div className="flex justify-evenly">
+          <div className="">
+            <h3 className="text-xl font-bold mb-4">Contact Us</h3>
+            <p>Email: info@example.com</p>
+            <p>Phone: +1 (123) 456-7890</p>
+          </div>
+          <div className="">
+            <h3 className="text-xl font-bold mb-4">Follow Us</h3>
+            <p>Facebook</p>
+            <p>Twitter</p>
+            <p>Instagram</p>
+          </div>
+          <div className=" ">
+            <h3 className="text-xl font-bold mb-4">Address</h3>
+            <p>123 Main Street</p>
+            <p>Cityville, State, 12345</p>
+          </div>
+        </div>
+      </div>
     </>
   );
 };

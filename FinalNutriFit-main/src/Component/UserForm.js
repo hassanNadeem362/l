@@ -102,7 +102,7 @@ const UserChoice = () => {
         User Preferences
       </h1>
 
-      <table className="w-4/5 mx-auto bg-white border border-gray-300 shadow-md rounded-lg overflow-hidden">
+      <table className="w-4/5 mb-10 mx-auto bg-white border border-gray-300 shadow-md rounded-lg overflow-hidden">
         <thead className="bg-gray-800 text-white">
           <tr>
             <th className="py-3 px-6 text-left border-r">User Information</th>
@@ -216,6 +216,27 @@ const UserChoice = () => {
           </tr>
         </tbody>
       </table>
+
+      <div className="bg-green-300 text-black py-8">
+        <div className="flex justify-evenly">
+          <div className="">
+            <h3 className="text-xl font-bold mb-4">Contact Us</h3>
+            <p>Email: info@example.com</p>
+            <p>Phone: +1 (123) 456-7890</p>
+          </div>
+          <div className="">
+            <h3 className="text-xl font-bold mb-4">Follow Us</h3>
+            <p>Facebook</p>
+            <p>Twitter</p>
+            <p>Instagram</p>
+          </div>
+          <div className=" ">
+            <h3 className="text-xl font-bold mb-4">Address</h3>
+            <p>123 Main Street</p>
+            <p>Cityville, State, 12345</p>
+          </div>
+        </div>
+      </div>
     </>
   );
 };

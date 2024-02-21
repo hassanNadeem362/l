@@ -14,9 +14,7 @@ const UpdateUserInfo = () => {
 
   console.log(userInfo);
 
- 
   const navigate = useNavigate();
-
 
   useEffect(() => {
     const user = Cookies.get("userInfo");
@@ -137,7 +135,7 @@ const UpdateUserInfo = () => {
         Edit User Information
       </h1>
       <form onSubmit={handleSubmit} className="mx-auto mt-8">
-        <table className="w-3/4 mx-auto border border-gray-300 shadow-md rounded-lg overflow-hidden">
+        <table className="w-3/4 mx-auto border border-gray-100 shadow-md rounded-lg overflow-hidden">
           <thead className="bg-gray-800 text-white">
             <tr>
               <th className="py-3 px-6 text-left border-r">User Information</th>
@@ -154,19 +152,23 @@ const UpdateUserInfo = () => {
               <td className="py-4 px-6 border-r border-b">
                 <div className="grid grid-cols-2 gap-4">
                   <div className="mb-4">
-                    <label className="block text-sm font-medium text-gray-600">
-                      Full Name:
+                    <label
+                      htmlFor="fullName"
+                      className="block text-sm font-medium text-gray-700"
+                    >
+                      Full Name
                       <input
+                        id="fullName"
                         type="text"
                         name="fullName"
                         value={userInfo.fullName}
-                        onChange={(e) =>
-                          handleChange(e)
-                        }
-                        className="form-input mt-1 block w-full rounded-md border-black shadow-sm"
+                        onChange={(e) => handleChange(e)}
+                        className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md bg-gray-50 px-4 py-2 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                        placeholder="John Doe"
                       />
                     </label>
                   </div>
+
                   <div className="mb-4">
                     <label className="block text-sm font-medium text-gray-600">
                       Email:
@@ -175,7 +177,7 @@ const UpdateUserInfo = () => {
                         name="email"
                         value={userInfo.email}
                         onChange={(e) => handleChange(e)}
-                        className="form-input mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
+                        className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md bg-gray-50 px-4 py-2 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500"
                       />
                     </label>
                   </div>
@@ -187,7 +189,7 @@ const UpdateUserInfo = () => {
                         name="phone"
                         value={userInfo.phone}
                         onChange={(e) => handleChange(e)}
-                        className="form-input mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
+                        className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md bg-gray-50 px-4 py-2 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500"
                       />
                     </label>
                   </div>
@@ -199,7 +201,7 @@ const UpdateUserInfo = () => {
                         name="gender"
                         value={userInfo.gender}
                         onChange={(e) => handleChange(e)}
-                        className="form-input mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
+                        className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md bg-gray-50 px-4 py-2 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500"
                       />
                     </label>
                   </div>
@@ -210,10 +212,8 @@ const UpdateUserInfo = () => {
                         type="date"
                         name="dateOfBirth"
                         value={userInfo.dateOfBirth}
-                        onChange={(e) =>
-                          handleChange(e)
-                        }
-                        className="form-input mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
+                        onChange={(e) => handleChange(e)}
+                        className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md bg-gray-50 px-4 py-2 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500"
                       />
                     </label>
                   </div>
@@ -225,7 +225,7 @@ const UpdateUserInfo = () => {
                         name="height"
                         value={userInfo.height}
                         onChange={(e) => handleChange(e)}
-                        className="form-input mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
+                        className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md bg-gray-50 px-4 py-2 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500"
                       />
                     </label>
                   </div>
@@ -236,10 +236,8 @@ const UpdateUserInfo = () => {
                         type="text"
                         name="currentWeight"
                         value={userInfo.currentWeight}
-                        onChange={(e) =>
-                          handleChange(e)
-                        }
-                        className="form-input mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
+                        onChange={(e) => handleChange(e)}
+                        className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md bg-gray-50 px-4 py-2 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500"
                       />
                     </label>
                   </div>
@@ -250,10 +248,8 @@ const UpdateUserInfo = () => {
                         type="text"
                         name="desiredWeight"
                         value={userInfo.desiredWeight}
-                        onChange={(e) =>
-                          handleChange(e)
-                        }
-                        className="form-input mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
+                        onChange={(e) => handleChange(e)}
+                        className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md bg-gray-50 px-4 py-2 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500"
                       />
                     </label>
                   </div>
@@ -270,10 +266,8 @@ const UpdateUserInfo = () => {
                         type="text"
                         name="healthGoal"
                         value={userInfo.healthGoal}
-                        onChange={(e) =>
-                          handleChange(e)
-                        }
-                        className="form-input mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
+                        onChange={(e) => handleChange(e)}
+                        className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md bg-gray-50 px-4 py-2 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500"
                       />
                     </label>
                   </div>
@@ -284,10 +278,8 @@ const UpdateUserInfo = () => {
                         type="text"
                         name="exercisePref"
                         value={userInfo.exercisePref}
-                        onChange={(e) =>
-                          handleChange(e)
-                        }
-                        className="form-input mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
+                        onChange={(e) => handleChange(e)}
+                        className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md bg-gray-50 px-4 py-2 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500"
                       />
                     </label>
                   </div>
@@ -298,10 +290,8 @@ const UpdateUserInfo = () => {
                         type="text"
                         name="dietaryPreferences"
                         value={userInfo.dietaryPreferences}
-                        onChange={(e) =>
-                          handleChange(e)
-                        }
-                        className="form-input mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
+                        onChange={(e) => handleChange(e)}
+                        className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md bg-gray-50 px-4 py-2 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500"
                       />
                     </label>
                   </div>
@@ -318,10 +308,8 @@ const UpdateUserInfo = () => {
                         type="text"
                         name="currentBody"
                         value={userInfo.currentBody}
-                        onChange={(e) =>
-                          handleChange(e)
-                        }
-                        className="form-input mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
+                        onChange={(e) => handleChange(e)}
+                        className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md bg-gray-50 px-4 py-2 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500"
                       />
                     </label>
                   </div>
@@ -332,10 +320,8 @@ const UpdateUserInfo = () => {
                         type="text"
                         name="desiredBody"
                         value={userInfo.desiredBody}
-                        onChange={(e) =>
-                          handleChange(e)
-                        }
-                        className="form-input mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
+                        onChange={(e) => handleChange(e)}
+                        className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md bg-gray-50 px-4 py-2 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500"
                       />
                     </label>
                   </div>
@@ -347,7 +333,7 @@ const UpdateUserInfo = () => {
                         name="ebwo"
                         value={userInfo.ebwo}
                         onChange={(e) => handleChange(e)}
-                        className="form-input mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
+                        className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md bg-gray-50 px-4 py-2 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500"
                       />
                     </label>
                   </div>
@@ -364,10 +350,8 @@ const UpdateUserInfo = () => {
                         type="text"
                         name="dailyActivityLevel"
                         value={userInfo.dailyActivityLevel}
-                        onChange={(e) =>
-                          handleChange(e)
-                        }
-                        className="form-input mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
+                        onChange={(e) => handleChange(e)}
+                        className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md bg-gray-50 px-4 py-2 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500"
                       />
                     </label>
                   </div>
@@ -378,10 +362,8 @@ const UpdateUserInfo = () => {
                         type="text"
                         name="dailyMealChoices"
                         value={userInfo.dailyMealChoices}
-                        onChange={(e) =>
-                          handleChange(e)
-                        }
-                        className="form-input mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
+                        onChange={(e) => handleChange(e)}
+                        className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md bg-gray-50 px-4 py-2 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500"
                       />
                     </label>
                   </div>
@@ -392,10 +374,8 @@ const UpdateUserInfo = () => {
                         type="text"
                         name="employmentStatus"
                         value={userInfo.employmentStatus}
-                        onChange={(e) =>
-                          handleChange(e)
-                        }
-                        className="form-input mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
+                        onChange={(e) => handleChange(e)}
+                        className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md bg-gray-50 px-4 py-2 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500"
                       />
                     </label>
                   </div>
@@ -406,10 +386,8 @@ const UpdateUserInfo = () => {
                         type="text"
                         name="physicalScheduleActivity"
                         value={userInfo.physicalScheduleActivity}
-                        onChange={(e) =>
-                          handleChange(e)
-                        }
-                        className="form-input mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
+                        onChange={(e) => handleChange(e)}
+                        className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md bg-gray-50 px-4 py-2 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500"
                       />
                     </label>
                   </div>
@@ -420,10 +398,8 @@ const UpdateUserInfo = () => {
                         type="text"
                         name="sleepTime"
                         value={userInfo.sleepTime}
-                        onChange={(e) =>
-                          handleChange(e)
-                        }
-                        className="form-input mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
+                        onChange={(e) => handleChange(e)}
+                        className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md bg-gray-50 px-4 py-2 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500"
                       />
                     </label>
                   </div>
@@ -434,26 +410,44 @@ const UpdateUserInfo = () => {
                         type="text"
                         name="wakeUpTime"
                         value={userInfo.wakeUpTime}
-                        onChange={(e) =>
-                          handleChange(e)
-                        }
-                        className="form-input mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
+                        onChange={(e) => handleChange(e)}
+                        className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md bg-gray-50 px-4 py-2 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500"
                       />
                     </label>
                   </div>
                 </div>
               </td>
             </tr>
+            <button
+              type="submit"
+              className="mt-4 mb-10 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:ring focus:border-blue-300"
+            >
+              Update Information
+            </button>
           </tbody>
         </table>
-
-        <button
-          type="submit"
-          className="mt-4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:ring focus:border-blue-300"
-        >
-          Update Information
-        </button>
       </form>
+
+      <div className="bg-green-300 text-black py-8">
+        <div className="flex justify-evenly">
+          <div className="">
+            <h3 className="text-xl font-bold mb-4">Contact Us</h3>
+            <p>Email: info@example.com</p>
+            <p>Phone: +1 (123) 456-7890</p>
+          </div>
+          <div className="">
+            <h3 className="text-xl font-bold mb-4">Follow Us</h3>
+            <p>Facebook</p>
+            <p>Twitter</p>
+            <p>Instagram</p>
+          </div>
+          <div className=" ">
+            <h3 className="text-xl font-bold mb-4">Address</h3>
+            <p>123 Main Street</p>
+            <p>Cityville, State, 12345</p>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };

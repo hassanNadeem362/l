@@ -58,7 +58,7 @@ const SuggestedFoods = ({ nutritionistId }) => {
 
   return (
     <PageWrapper>
-      <h3 className="underline font-semibold">Food Added:</h3>
+      <h3 className="underline font-semibold">My Foods:</h3>
       <Wrapper>
         <Splide
           options={{
@@ -90,22 +90,20 @@ const SuggestedFoods = ({ nutritionistId }) => {
                   <h3>{food.foodName}</h3>
                   <p>{food.description}</p>
                   <div
-                    className="delete-icon bg-red-400 text-black max-w-min p-2 mb-3 border-{10px}"
+                    className="delete-icon text-black bg-red-400 max-w-min p-2 mb-3 border-{10px}"
                     onClick={() => handleDeleteFood(food._id)}
                   >
                     Delete
                   </div>
                   <Link
-                to={`/updateFood/${food._id}`}
-                onClick={() => updateFood(food._id)}
-                className="text-black bg-green-300 p-3"
-              >
-                Edit Food
+                    to={`/updateFood/${food._id}`}
+                    onClick={() => updateFood(food._id)}
+                    className="text-black bg-green-300 p-3"
+                  >
+                    Edit Food
                   </Link>
-                  
                 </div>
               </Card>
-              
             </SplideSlide>
           ))}
         </Splide>
@@ -120,7 +118,7 @@ const Wrapper = styled.div`
 
 const Card = styled.div`
   height: 450px;
-  
+
   overflow: hidden;
   position: relative;
   cursor: pointer;
@@ -129,8 +127,6 @@ const Card = styled.div`
   &:hover {
     transform: scale(1.05);
   }
-
- 
 
   .info {
     padding: 1rem;

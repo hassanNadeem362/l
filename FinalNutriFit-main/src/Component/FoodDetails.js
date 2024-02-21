@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import { Link, useParams } from "react-router-dom"; 
+import { Link, useParams } from "react-router-dom";
 import { Image } from "react-bootstrap";
 import axios from "axios";
 import { HeartFill } from "react-bootstrap-icons";
@@ -12,11 +12,12 @@ import Typewriter from "typewriter-effect";
 import { useNavigate } from "react-router-dom";
 import { IconButton } from "@mui/material";
 import ChatIcon from '@mui/icons-material/Chat';
+import { toast } from "react-toastify";
 
 
 
 const FoodDetails = () => {
-  const { foodId } = useParams(); 
+  const { foodId } = useParams();
   const navigate = useNavigate();
   const [foodDetails, setFoodDetails] = useState({});
   console.log("🚀 ~ FoodDetails ~ foodDetails:", foodDetails);
@@ -27,6 +28,17 @@ const FoodDetails = () => {
 
   const role = localStorage.getItem("userRole");
 
+  const userData = Cookies.get("userInfo");
+  let currentUser = userData ? JSON.parse(userData) : null;
+
+  const RedirectUser = () => {
+    if (!currentUser) {
+        toast("Please Login to Chat Nutritionist");
+    } else {
+      navigate('/chat')
+    }
+  }
+
   const arrayBufferToBase64 = (buffer) => {
     let binary = "";
     const bytes = new Uint8Array(buffer);
@@ -35,14 +47,14 @@ const FoodDetails = () => {
     }
     return window.btoa(binary);
   };
- 
+
   const handleSignOut = () => {
     Cookies.remove("userInfo");
     localStorage.removeItem("userRole");
     navigate("/Login");
   };
 
-  const userInfo = Cookies.getItem("userInfo");
+ 
 
   useEffect(() => {
     // Fetch food details using the foodId
@@ -283,10 +295,10 @@ const FoodDetails = () => {
                   <td>{foodDetails.nutritionistId.phone}</td>
                 </tr>
                 <tr>
-                  <td className="pr-4 font-semibold" onClick={() => navigate('/chat')} >
-                   <IconButton>
-                    <ChatIcon />
-                   </IconButton>
+                  <td className="pr-4 font-semibold" >
+                    <IconButton onClick={RedirectUser} >
+                      <ChatIcon />
+                    </IconButton>
                   </td>
                   <td>Nutritionists</td>
                 </tr>

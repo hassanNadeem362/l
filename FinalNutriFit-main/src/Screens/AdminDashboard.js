@@ -196,7 +196,7 @@ const AdminDashboard = () => {
 
       <div>
         <h1 className="mt-4 mb-4 text-center text-3xl font-semibold">
-          Admin Dashboard
+          Dashboard
         </h1>
       </div>
 

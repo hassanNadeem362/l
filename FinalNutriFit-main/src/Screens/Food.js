@@ -6,6 +6,7 @@ import { toast } from "../Component/toastr/toaster.tsx";
 import { ToastContainer } from "react-toastify";
 import PersonIcon from "@mui/icons-material/Person";
 import LocalDiningIcon from "@mui/icons-material/LocalDining";
+import AccountBoxIcon from "@mui/icons-material/AccountBox";
 
 
 
@@ -26,6 +27,8 @@ function Food() {
 
 
   const navigate = useNavigate();
+
+
   const role = localStorage.getItem("userRole");
 
   useEffect(() => {
@@ -161,49 +164,18 @@ function Food() {
               About Us
             </Link>
           </div>
-          {!role ? (
-            <div class="space-x-4">
-              <Link
-                to={"/Login"}
-                class="text-black text-xl px-3 py-1 navbar-link"
-              >
-                <PersonIcon /> Login
-              </Link>
-              <Link
-                to={"/UserSignUp"}
-                class="text-black text-xl px-3 py-1 navbar-link"
-              >
-                <AccountBoxIcon /> SignUp
-              </Link>
-            </div>
-          ) : (
-            <div class="space-x-4">
-              <button
-                onClick={handleProfileClick}
-                className="text-black text-xl px-3 py-1 navbar-link"
-              >
-                Dashboard
-              </button>
-              <Link
-                to={"/Login"}
-                class="text-black text-xl px-3 py-1 navbar-link"
-              >
-                <button onClick={handleSignOut}>
-                  <PersonIcon /> SignOut
-                </button>
-              </Link>
-            </div>
-          )}
+          
         </div>
       </nav>
 
       <div className="max-w-md flex gap-7 p-4 mx-auto bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 rounded-sm">
-        <button
-          onClick={handleProfileClick}
+        <Link 
+        to = "/dashboard"
+          // onClick={handleProfileClick}
           className="text-black text-xl p-1 rounded-xl"
         >
           🏠 Home
-        </button>
+        </Link>
       </div>
 
 
