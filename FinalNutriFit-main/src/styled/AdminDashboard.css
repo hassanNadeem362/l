@@ -1,0 +1,44 @@
+.ChatShow{
+    position: absolute;
+    top: 9rem;
+    right: 25.6%;
+    background-color: #efeae2;
+    width: 48rem;
+    height: 30rem;
+    overflow-y: scroll;
+    scroll-behavior: smooth;
+    scrollbar-width: 5px;
+}
+
+
+.ChatShow > .messageContainer{
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    padding: 10px;
+}
+.ChatShow > .messageContainer > .me{
+    align-self: flex-start;
+    background-color: #25d366;
+    width: fit-content;
+    padding: 5px 10px;
+    border-radius: 0 30px 30px 30px;
+    color: #fff;
+}
+.ChatShow > .messageContainer > .receiver{
+    align-self: flex-end;
+    background-color: #fff;
+    width: fit-content;
+    padding: 5px 10px;
+    border-radius: 30px 0 30px 30px;
+
+}
+.ChatShow > .messageContainer > .messageItem{
+    display: flex;
+    justify-content: space-between;
+    font-family: sans-serif;
+}
+.ChatShow > .messageContainer > .messageItem > span{
+    text-align: left;
+    width: 25%;
+}

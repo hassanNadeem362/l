@@ -33,6 +33,19 @@ const allMessages = async (req, res) => {
     res.status(500).json({ error: "Internal Server Error" });
   }
 };
+const fetchallMessages = async (req, res) => {
+  try {
+    const chatId = req.params.chatId;
+    const messages = await Message.find()
+      .populate("sender", "name pic email")
+      .populate("chat");
+
+    res.json(messages);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+};
 
 
-module.exports = { sendMessage, allMessages };
+module.exports = { sendMessage, allMessages, fetchallMessages };

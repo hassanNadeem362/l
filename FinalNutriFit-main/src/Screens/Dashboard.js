@@ -12,6 +12,8 @@ import Cookies from "js-cookie";
 import axios from "axios";
 import { toast } from "../Component/toastr/toaster.tsx";
 import UserChoice from "../Component/UserForm.js";
+import { IconButton } from "@mui/material";
+import ChatIcon from '@mui/icons-material/Chat';
 
 const Dashboard = () => {
   const [dash, setDash] = useState(null);
@@ -283,6 +285,10 @@ const Dashboard = () => {
         </Link>
         <Link to={"/update"} className="text-white">
           🔄 Update Profile
+        </Link>
+        <Link to={"/chat"} className="text-white">
+          <ChatIcon />
+          Chat
         </Link>
       </div>
       <div className="max-w-3xl mx-auto p-8 rounded-md">

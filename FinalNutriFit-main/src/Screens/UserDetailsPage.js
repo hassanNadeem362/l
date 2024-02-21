@@ -81,36 +81,6 @@ const UserDetailsPage = () => {
         </div>
       </nav>
 
-      {/* <div className="max-w-3xl mx-auto p-8 bg-green-200 rounded-md">
-        <header className="text-center mb-8">
-          <h1 className="text-3xl font-semibold">Your Daily Summary</h1>
-        </header>
-        <section className="flex items-center justify-between mb-8 mt-20">
-         
-          <div className="flex-grow mx-4">
-            <p className="mb-2">Total Calories:</p>
-            <p className="text-2xl font-semibold">{}</p>
-          </div>
-        </section>
-        <div className="flex justify-between">
-          <h4 className="p-2 bg-red-400 rounded-md shadow-lg">
-            Calories Goal : <strong> {} </strong>{" "}
-          </h4>{" "}
-          <span className="p-2">=</span>
-          <div className="flex shadow-lg bg-white rounded-md">
-            <h4 className="p-2 bg-blue-400 rounded-md shadow-lg">
-              Calories Gained: <strong> {} </strong>{" "}
-            </h4>
-            <span className="p-2">-</span>
-            <h4 className="p-2 bg-blue-400 rounded-md shadow-lg">
-              Calories Burned: <strong> {} </strong>{" "}
-            </h4>
-          </div>
-          <span className="p-2">=</span>
-          <h4 className="p-2 bg-red-400 rounded-md shadow-lg">
-            Net Calories: <strong> {} </strong>{" "}
-          </h4>
-        </div> */}
       <div className="mt-16">
         <UserDataForNut data={dash} />
       </div>

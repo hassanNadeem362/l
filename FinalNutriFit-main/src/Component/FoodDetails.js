@@ -35,12 +35,14 @@ const FoodDetails = () => {
     }
     return window.btoa(binary);
   };
-
+ 
   const handleSignOut = () => {
     Cookies.remove("userInfo");
     localStorage.removeItem("userRole");
     navigate("/Login");
   };
+
+  const userInfo = Cookies.getItem("userInfo");
 
   useEffect(() => {
     // Fetch food details using the foodId

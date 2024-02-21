@@ -7,16 +7,22 @@ import { useNavigate, Link } from "react-router-dom";
 import AccountBoxIcon from "@mui/icons-material/AccountBox";
 import LocalDiningIcon from "@mui/icons-material/LocalDining";
 import PersonIcon from "@mui/icons-material/Person";
+import { IconButton } from "@mui/material";
+import ChatIcon from '@mui/icons-material/Chat';
+import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
+import "../styled/AdminDashboard.css"
 
 
 const AdminDashboard = () => {
   const [data, setData] = useState([]);
-  const [view, setView] = useState("users"); // Default view is users
+  const [view, setView] = useState("users");
+  const [showchat, setShowChat] = useState(false);
+  const [messageAll, setMessage] = useState([]);
 
 
   const role = localStorage.getItem("userRole");
 
-  
+
 
 
   const fetchData = async () => {
@@ -37,8 +43,24 @@ const AdminDashboard = () => {
     }
   };
 
+  const fetchAllMessages = async () => {
+    try {
+      const config = {
+        headers: {
+          "Content-type": "application/json",
+        },
+      };
+      const { data } = await axios.get("http://localhost:5000/api/message", config);
+      setMessage(data);
+      console.log(data);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   useEffect(() => {
     fetchData();
+    fetchAllMessages();
   }, [view]);
 
   const handleDeleteClick = async (userId) => {
@@ -71,6 +93,8 @@ const AdminDashboard = () => {
     localStorage.removeItem("userRole");
     navigate("/Login");
   };
+
+  
   const handleMoreClick = async (userId, role) => {
     console.log("🚀 ~ handleMoreClick ~ role:", role);
 
@@ -91,9 +115,9 @@ const AdminDashboard = () => {
     }
   };
 
-  
-
-
+  const ChatShow = () => {
+    setShowChat(!showchat);
+  }
 
   return (
     <>
@@ -122,6 +146,7 @@ const AdminDashboard = () => {
             >
               About Us
             </Link>
+
           </div>
           <div className="space-x-4">
             {!role ? (
@@ -164,14 +189,9 @@ const AdminDashboard = () => {
         <button onClick={profile} className="text-white">
           🔄 Update Profile
         </button>
-        {/* <div className="space-x-4">
-          <button
-            onClick={handleSignOut}
-            className="text-black text-xl p-1 rounded-xl"
-          >
-            <AccountBoxIcon /> Sign Out
-          </button>
-        </div> */}
+        <IconButton onClick={ChatShow}>
+          <ChatIcon />
+        </IconButton>
       </div>
 
       <div>
@@ -222,6 +242,23 @@ const AdminDashboard = () => {
             ))}
           </tbody>
         </Table>
+        {
+          showchat && (<div className="ChatShow">
+
+            {
+              messageAll.map(e => (
+                <div className="messageContainer">
+                  <div className="me">
+                    {e.sender.name}
+                  </div>
+                  <div className="receiver">
+                   {e.content}
+                  </div>
+                </div>
+              ))
+            }
+          </div>)
+        }
       </div>
     </>
   );
