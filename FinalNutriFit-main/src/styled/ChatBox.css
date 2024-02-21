@@ -32,6 +32,8 @@
     flex-direction: column;
     gap: 1rem;
     padding: 10px;
+    overflow: scroll;
+    scroll-behavior: smooth;
 }
 .chatBox_section > .Body_section > .message {
     width: fit-content;

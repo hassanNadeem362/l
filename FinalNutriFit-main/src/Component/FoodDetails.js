@@ -1,40 +1,6 @@
-// // FoodDetails.js
-// import React from 'react';
-// import { useParams } from 'react-router-dom';
-
-// const FoodDetails = ({ addedFoods }) => {
-//   console.log("🚀 ~ FoodDetails ~ addedFoods:", addedFoods)
-//   const { foodId } = useParams();
-//   const food = addedFoods.find((item) => item._id === foodId);
-
-//   if (!food) {
-//     return <div>Food not found!</div>;
-//   }
-
-//   // Extracting other fields except image and name
-//   const { calories, carbs, fats, protein, cholesterol, fiber, sodium } = food;
-
-//   return (
-//     <div>
-//       <h1>{food.foodName}</h1>
-//       <p>Description: {food.description}</p>
-//       <p>Calories: {calories}</p>
-//       <p>Carbs: {carbs}</p>
-//       <p>Fats: {fats}</p>
-//       <p>Protein: {protein}</p>
-//       <p>Cholesterol: {cholesterol}</p>
-//       <p>Fiber: {fiber}</p>
-//       <p>Sodium: {sodium}</p>
-//       {/* Add more fields as needed */}
-//     </div>
-//   );
-// };
-
-// export default FoodDetails;
-// Import necessary dependencies
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import { Link, useParams } from "react-router-dom"; // Import useParams from React Router
+import { Link, useParams } from "react-router-dom"; 
 import { Image } from "react-bootstrap";
 import axios from "axios";
 import { HeartFill } from "react-bootstrap-icons";
@@ -45,11 +11,12 @@ import PersonIcon from "@mui/icons-material/Person";
 import Typewriter from "typewriter-effect";
 import { useNavigate } from "react-router-dom";
 import { IconButton } from "@mui/material";
+import ChatIcon from '@mui/icons-material/Chat';
 
 
-// Create a functional component for the details page
+
 const FoodDetails = () => {
-  const { foodId } = useParams(); // Get the foodId from the URL parameters
+  const { foodId } = useParams(); 
   const navigate = useNavigate();
   const [foodDetails, setFoodDetails] = useState({});
   console.log("🚀 ~ FoodDetails ~ foodDetails:", foodDetails);
@@ -315,7 +282,9 @@ const FoodDetails = () => {
                 </tr>
                 <tr>
                   <td className="pr-4 font-semibold" onClick={() => navigate('/chat')} >
-                    Chat:
+                   <IconButton>
+                    <ChatIcon />
+                   </IconButton>
                   </td>
                   <td>Nutritionists</td>
                 </tr>

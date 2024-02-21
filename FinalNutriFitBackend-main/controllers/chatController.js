@@ -1,3 +1,4 @@
+const Message = require("../models/MessageModel");
 const Chat = require("../models/chatModel");
 
 
@@ -41,9 +42,14 @@ const fetchChats = async (req, res) => {
     const { currentUser, userId } = req.body;
     let result = await Chat.find({
       users: { $all: [currentUser, userId] }
-    }).populate('sender'); // Assuming 'sender' is the field referencing the User model
+    }); 
 
-    res.status(200).json(result);
+    let message = await Message.find({
+      sender: userId
+    });
+
+
+    res.status(200).json({result, message});
   } catch (error) {
     console.log(error);
     res.status(500).send("Internal Server Error");
