@@ -64,7 +64,7 @@ const ChatBox = () => {
 
   useEffect(() => {
     fetchMessage()
-  }, [chat])
+  }, [messages])
 
 
 
