@@ -108,7 +108,7 @@ import Cuisine from "./pages/Cuisine";
 import Searched from "./pages/Searched";
 import UpdateUserInfo from "./Screens/updateUserInfo";
 import Chat from "./Screens/Chat";
-
+import AllFoodsForAdmin from "./Component/AllFoodsForAdmin";
 
 function App() {
   return (
@@ -269,6 +269,7 @@ function App() {
           <Route path="/searched/:search" element={<Searched />} />
           <Route path="/" element={<Home />} />
           <Route path="/chat" element={<Chat />} />
+          <Route path="/AllFoodsForAdmin" element={<AllFoodsForAdmin />} />
 
           {/* <Category />
           <Pages /> */}

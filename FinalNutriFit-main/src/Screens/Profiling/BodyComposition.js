@@ -54,7 +54,7 @@ const BodyComposition = () => {
       <div className="  mt-8 ml-96 mr-96 rounded-xl p-16 drop-shadow-2xl border-2">
         <div className="bg-gray-400 h-2 rounded-xl">
           <div
-            className="bg-blue-500 h-full  rounded-xl"
+            className="bg-green-400 h-full  rounded-xl"
             style={{ width: `${((currentStep - 1) / totalSteps) * 100}%` }}
           ></div>
         </div>

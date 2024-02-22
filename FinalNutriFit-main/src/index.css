@@ -66,3 +66,10 @@ a {
     margin-left: 10px;
     /* Adjust the spacing between elements */
 }
+
+.active-tab {
+    background-color: #cdfda0; /* Set the background color for the active tab */
+    color: #000; /* Set the text color for the active tab */
+    padding: 3px;
+    border-radius: 5px;
+  }

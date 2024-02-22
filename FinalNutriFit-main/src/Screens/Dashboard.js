@@ -304,18 +304,20 @@ const Dashboard = () => {
             <p className="text-2xl font-semibold">{calories}</p>
           </div>
           <div className="flex space-x-4">
+          <button
+              onClick={handleAddFood}
+              className="bg-blue-500 text-white px-4 py-2 rounded"
+            >
+              Add Food
+            </button>
+            
             <button
               onClick={handleAddExercise}
               className="bg-green-500 text-white px-4 py-2 rounded"
             >
               Add Exercise
             </button>
-            <button
-              onClick={handleAddFood}
-              className="bg-blue-500 text-white px-4 py-2 rounded"
-            >
-              Add Food
-            </button>
+            
           </div>
         </section>
         <div className="flex justify-between mx-auto">
@@ -355,8 +357,8 @@ const Dashboard = () => {
         {/* <UserChoice /> */}
       </div>
 
-      <div className="bg-green-300 text-black py-8">
-        <div className="flex justify-evenly">
+      <div className="bg-green-300 text-black py-8 absolute bottom-0 w-full">
+        <div className="flex justify-evenly ">
           <div className="">
             <h3 className="text-xl font-bold mb-4">Contact Us</h3>
             <p>Email: info@example.com</p>

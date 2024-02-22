@@ -12,19 +12,20 @@ import ChatIcon from '@mui/icons-material/Chat';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import "../styled/AdminDashboard.css"
 
-
 const AdminDashboard = () => {
   const [data, setData] = useState([]);
   const [view, setView] = useState("users");
   const [showchat, setShowChat] = useState(false);
   const [messageAll, setMessage] = useState([]);
 
-
   const role = localStorage.getItem("userRole");
 
+<<<<<<< HEAD
+=======
 
 
 
+>>>>>>> e7127aa84f91f591d5d309094f03dab01bcdc54e
   const fetchData = async () => {
     try {
       const response = await axios.get(
@@ -115,10 +116,13 @@ const AdminDashboard = () => {
     }
   };
 
+<<<<<<< HEAD
+=======
   const ChatShow = () => {
     setShowChat(!showchat);
   }
 
+>>>>>>> e7127aa84f91f591d5d309094f03dab01bcdc54e
   return (
     <>
       <nav className="bg-green-300 p-5">
@@ -180,18 +184,31 @@ const AdminDashboard = () => {
         </div>
       </nav>
       <div className="max-w-3xl flex gap-7 p-4 mx-auto bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 rounded-md shadow-lg">
-        <button onClick={switchToNutritionistView} className="text-white">
+        <button
+          onClick={switchToNutritionistView}
+          className={`text-white ${view === "nutritionists" && "active-tab"}`}
+        >
           👥 View Nutritionists
         </button>
-        <button onClick={switchToUsersView} className="text-white">
+        <button
+          onClick={switchToUsersView}
+          className={`text-white ${view === "users" && "active-tab"}`}
+        >
           👥 View Users
         </button>
+        <Link to="/AllFoodsForAdmin" className="text-white">
+          🍎 Foods
+        </Link>
         <button onClick={profile} className="text-white">
           🔄 Update Profile
         </button>
+<<<<<<< HEAD
+        {/* ... (other buttons) */}
+=======
         <IconButton onClick={ChatShow}>
           <ChatIcon />
         </IconButton>
+>>>>>>> e7127aa84f91f591d5d309094f03dab01bcdc54e
       </div>
 
       <div>

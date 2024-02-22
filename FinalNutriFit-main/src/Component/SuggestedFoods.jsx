@@ -12,6 +12,8 @@ const SuggestedFoods = ({ nutritionistId }) => {
   console.log("🚀 ~ SuggestedFoods ~ addedFoods:", addedFoods);
   const history = useNavigate();
 
+  const role = localStorage.getItem("userRole");
+
   const arrayBufferToBase64 = (buffer) => {
     let binary = "";
     const bytes = new Uint8Array(buffer);
@@ -58,7 +60,7 @@ const SuggestedFoods = ({ nutritionistId }) => {
 
   return (
     <PageWrapper>
-      <h3 className="underline font-semibold">My Foods:</h3>
+      <h3 className="underline font-semibold">Added Foods:</h3>
       <Wrapper>
         <Splide
           options={{
@@ -95,13 +97,18 @@ const SuggestedFoods = ({ nutritionistId }) => {
                   >
                     Delete
                   </div>
-                  <Link
-                    to={`/updateFood/${food._id}`}
-                    onClick={() => updateFood(food._id)}
-                    className="text-black bg-green-300 p-3"
-                  >
-                    Edit Food
-                  </Link>
+
+                  {role === "nutritionist" ? (
+                    <Link
+                      to={`/updateFood/${food._id}`}
+                      onClick={() => updateFood(food._id)}
+                      className="text-black bg-green-300 p-3"
+                    >
+                      Edit Food
+                    </Link>
+                  ) : (
+                    <div></div>
+                  )}
                 </div>
               </Card>
             </SplideSlide>

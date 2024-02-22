@@ -217,7 +217,7 @@ const UserChoice = () => {
         </tbody>
       </table>
 
-      <div className="bg-green-300 text-black py-8">
+      <div className="bg-green-300 text-black py-8 absolute bottom-0 w-full">
         <div className="flex justify-evenly">
           <div className="">
             <h3 className="text-xl font-bold mb-4">Contact Us</h3>

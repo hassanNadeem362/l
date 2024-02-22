@@ -170,39 +170,40 @@ const NutritionistDashboard = () => {
         </div>
       </nav>
       <div className="max-w-3xl flex gap-7 p-4 mx-auto bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 rounded-md shadow-lg">
-        <button
-          onClick={dashboard}
-          className="text-white hover:text-gray-100 focus:outline-none"
-        >
-          🏠 Home
-        </button>
-        <button
-          onClick={addFood}
-          className="text-white hover:text-gray-100 focus:outline-none"
-        >
-          🍲 Add Food
-        </button>
-        <button
-          onClick={users}
-          className="text-white hover:text-gray-100 focus:outline-none"
-        >
-          👥 View Users
-        </button>
-        <button
-          onClick={profile}
-          className="text-white hover:text-gray-100 focus:outline-none"
-        >
-          🔄 Update Profile
-        </button>
-        <button
-          onClick={chatBoad}
-          className="text-white hover:text-gray-100 focus:outline-none"
-        >
-          <IconButton>
-            <ChatIcon />
-          </IconButton>
-          Chat
-        </button>
+      <button
+  onClick={dashboard}
+  className={`text-white hover:text-gray-100 focus:outline-none ${usersView === false && "active-tab"}`}
+>
+  🏠 Home
+</button>
+<button
+  onClick={addFood}
+  className="text-white hover:text-gray-100 focus:outline-none"
+>
+  🍲 Add Food
+</button>
+<button
+  onClick={users}
+  className={`text-white hover:text-gray-100 focus:outline-none ${usersView === true && "active-tab"} `}
+>
+  👥 View Users
+</button>
+<button
+  onClick={profile}
+  className="text-white hover:text-gray-100 focus:outline-none"
+>
+  🔄 Update Profile
+</button>
+<button
+  onClick={chatBoad}
+  className="text-white hover:text-gray-100 focus:outline-none"
+>
+  <IconButton>
+    <ChatIcon />
+  </IconButton>
+  Chat
+</button>
+
       </div>
 
       {!usersView && dash && (

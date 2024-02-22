@@ -99,7 +99,7 @@ const ExerciseType2 = ({ onNext }) => {
             </label>
           </div>
 
-          <div className="text-lg ml-5 mb-5 border-2rounded-lg p-1 hover:bg-green-400 ">
+          <div className="text-lg ml-5 mb-5 border-2 rounded-lg p-1 hover:bg-green-400 ">
             <label>
               <input
                 required

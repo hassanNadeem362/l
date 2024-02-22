@@ -1,9 +1,10 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
 import { ToastContainer } from "react-toastify";
 import { toast } from "../../../Component/toastr/toaster.tsx";
+
 // ---------------------------------------3
 const WeeklyGoal = () => {
   const totalSteps = 21;
@@ -13,7 +14,9 @@ const WeeklyGoal = () => {
   const [isFieldSelected, setIsFieldSelected] = useState(false);
   const [weeklyGoalWeightGain, setWeeklyGoalWeightGain] = useState("");
 
-  // const userInfo = user ? JSON.parse(user) : null;
+  const navigate = useNavigate();
+  let user = Cookies.get("userInfo");
+  const userInfo = user ? JSON.parse(user) : null;
 
   const handleNext = async () => {
     try {
@@ -123,6 +126,19 @@ const WeeklyGoal = () => {
                   onChange={(e) => setInputValue(e.target.value)}
                 />
                 2 Per Week
+              </label>
+            </div>
+            <div className="text-2xl ml-5 mb-5 border-2 rounded-lg p-1 hover:bg-green-400 ">
+              <label htmlFor="option-2">
+                <input
+                  required
+                  style={{ width: "20px", height: "20px", marginRight: "8px" }}
+                  type="radio"
+                  value="0"
+                  checked={inputValue === "0"}
+                  onChange={(e) => setInputValue(e.target.value)}
+                />
+                0 Per Week(Maintain)
               </label>
             </div>
             {/* <button
