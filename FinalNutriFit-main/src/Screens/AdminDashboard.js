@@ -20,12 +20,9 @@ const AdminDashboard = () => {
 
   const role = localStorage.getItem("userRole");
 
-<<<<<<< HEAD
-=======
-
-
-
->>>>>>> e7127aa84f91f591d5d309094f03dab01bcdc54e
+//<<<<<<< HEAD
+//=======
+//>>>>>>> e7127aa84f91f591d5d309094f03dab01bcdc54e
   const fetchData = async () => {
     try {
       const response = await axios.get(
@@ -116,13 +113,13 @@ const AdminDashboard = () => {
     }
   };
 
-<<<<<<< HEAD
-=======
+// <<<<<<< HEAD
+// =======
   const ChatShow = () => {
     setShowChat(!showchat);
   }
 
->>>>>>> e7127aa84f91f591d5d309094f03dab01bcdc54e
+// >>>>>>> e7127aa84f91f591d5d309094f03dab01bcdc54e
   return (
     <>
       <nav className="bg-green-300 p-5">
@@ -202,13 +199,13 @@ const AdminDashboard = () => {
         <button onClick={profile} className="text-white">
           🔄 Update Profile
         </button>
-<<<<<<< HEAD
+{/* <<<<<<< HEAD */}
         {/* ... (other buttons) */}
-=======
+{/* ======= */}
         <IconButton onClick={ChatShow}>
           <ChatIcon />
         </IconButton>
->>>>>>> e7127aa84f91f591d5d309094f03dab01bcdc54e
+{/* >>>>>>> e7127aa84f91f591d5d309094f03dab01bcdc54e */}
       </div>
 
       <div>
