@@ -1,19 +1,22 @@
 import React, { useEffect, useState } from "react";
-import Exercise from "./Profiling/2/Ex-yes/Exercise";
-import FacebookIcon from "@mui/icons-material/Facebook";
 import MonitorWeightIcon from "@mui/icons-material/MonitorWeight";
-import { green, red } from "@mui/material/colors";
 import { Link, useNavigate } from "react-router-dom";
 import LocalDiningIcon from "@mui/icons-material/LocalDining";
-import Typewriter from "typewriter-effect";
 import AccountBoxIcon from "@mui/icons-material/AccountBox";
 import PersonIcon from "@mui/icons-material/Person";
 import Cookies from "js-cookie";
 import axios from "axios";
-import { toast } from "../Component/toastr/toaster.tsx";
-import UserChoice from "../Component/UserForm.js";
-import { IconButton } from "@mui/material";
 import ChatIcon from '@mui/icons-material/Chat';
+
+import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
+import CardMedia from '@mui/material/CardMedia';
+import Typography from '@mui/material/Typography';
+import { CardActionArea, Grid } from "@mui/material";
+import Avacado from "../assets/Food_Recommended_Images/avocado.jpg";
+import nutbutter from "../assets/Food_Recommended_Images/nutbutter.jpg"
+import greenLeafvegetable from "../assets/Food_Recommended_Images/green-leafy-vegetables.jpg"
+import yugurt from "../assets/Food_Recommended_Images/yugurt.jpg"
 
 const Dashboard = () => {
   const [dash, setDash] = useState(null);
@@ -22,6 +25,59 @@ const Dashboard = () => {
   const [caloriesBurned, setCaloriesBurned] = useState(0);
   const [dynamicProgress, setDynamicProgress] = useState(0);
   const [calories, setCalories] = useState(0);
+  const [fruitData, setFruitData] = useState({});
+
+  const selectFood = [
+    {
+      type: "gain",
+      preference:"pescatarian",
+      img: Avacado,
+      fruit: "Avacado",
+      desc: "Rich in healthy fats, avocados are calorie-dense and versatile. They can be added to salads, sandwiches, or blended into smoothies",
+      grams: 100,
+      usesOne: "Guacamole, salads",
+      usesTwo: "sandwiches, smoothies",
+      usesThree: "toast, sushi",
+      usesFour: "soups, dressings",
+      usesFive: "baking, skincare"
+    },
+    {
+      type: "gain",
+      preference:"pescatarian",
+      img: nutbutter,
+      fruit: "Nuts and Nut Butters",
+      desc: "Almonds, cashews, peanuts, and their respective nut butters are packed with calories and healthy fats. They make for excellent snacks or additions to meals",
+      grams: 28,
+      usesOne: "fats, protein",
+      usesTwo: "ideal for snacking",
+      usesThree: "adding flavor and texture to dishes",
+      usesFour: "smoothies, salads",
+      usesFive: "baking, skincare"
+    },
+    {
+      type: "loss",
+      img: greenLeafvegetable,
+      fruit: "Green-leaf",
+      desc: "Foods like spinach, kale, and Swiss chard are low in calories but high in fiber, vitamins, and minerals",
+      grams: 28,
+      usesOne: "Guacamole, salads",
+      usesTwo: "sandwiches, smoothies",
+      usesThree: "toast, sushi",
+      usesFour: "soups, dressings",
+      usesFive: "baking, skincare"
+    },
+    {
+      type: "loss",
+      img: yugurt,
+      fruit: "Yogurt",
+      desc: " Greek yogurt is high in protein and can be a satisfying snack or addition to meals",
+      usesOne: "Guacamole, salads",
+      usesTwo: "sandwiches, smoothies",
+      usesThree: "toast, sushi",
+      usesFour: "soups, dressings",
+      usesFive: "baking, skincare"
+    },
+  ]
   const navigate = useNavigate();
 
   const role = localStorage.getItem("userRole");
@@ -41,6 +97,8 @@ const Dashboard = () => {
 
   let user = Cookies.get("userInfo");
   const userInfo = user ? JSON.parse(user) : null;
+  console.log("User Info"+userInfo);
+
   useEffect(() => {
     if (!userInfo?._id) navigate("/Login");
   }, []);
@@ -78,7 +136,7 @@ const Dashboard = () => {
           dateOfBirth,
           dailyActivityLevel,
         } = response.data.data;
-
+        setFruitData(response.data.data);
         // Convert height from feet to centimeters
         const heightInCm = parseFloat(height) * 30.48;
 
@@ -133,7 +191,6 @@ const Dashboard = () => {
     const fetchData = async () => {
       try {
         const userId = userInfo?._id;
-
         const response = await axios.get(
           `http://localhost:5000/api/user/${userId}/dashboard`
         );
@@ -203,6 +260,12 @@ const Dashboard = () => {
       calories > 0 ? (caloriesTaken / calories) * 100 : 0;
     setDynamicProgress(dynamicProgressValue);
   }, [calories, caloriesTaken]);
+
+  const filterFruits = selectFood.filter((fruits) => {
+      const fruit = fruits.type === fruitData.healthGoal;
+      return fruit;
+  });
+  
 
   return (
     <>
@@ -304,20 +367,20 @@ const Dashboard = () => {
             <p className="text-2xl font-semibold">{calories}</p>
           </div>
           <div className="flex space-x-4">
-          <button
+            <button
               onClick={handleAddFood}
               className="bg-blue-500 text-white px-4 py-2 rounded"
             >
               Add Food
             </button>
-            
+
             <button
               onClick={handleAddExercise}
               className="bg-green-500 text-white px-4 py-2 rounded"
             >
               Add Exercise
             </button>
-            
+
           </div>
         </section>
         <div className="flex justify-between mx-auto">
@@ -354,10 +417,76 @@ const Dashboard = () => {
             )}%`}</span>
           </div>
         </section>
-        {/* <UserChoice /> */}
+        <div className="FoodRecommendation">
+          {
+            filterFruits.map((value) => (
+              <Grid container spacing={2} sx={{margin:"0 1rem 0 0"}}>
+                <Grid item xs={6} md={6}>
+                  <Card md={6}>
+                    <CardActionArea>
+                      <CardMedia
+                        component="img"
+                
+                        sx={{height:"248px"}}
+                        image={value.img}
+                        alt="green iguana"
+                      />
+                      <CardContent>
+                        <Typography gutterBottom variant="h5" component="div">
+                          {value.fruit}
+                        </Typography>
+                        <Typography variant="body2" color="text.secondary" sx={{ textAlign: "justify" }}>
+                          {value.desc}
+                        </Typography>
+                      </CardContent>
+                    </CardActionArea>
+                  </Card>
+                </Grid>
+                <Grid item xs={6} md={6}>
+                  <Card md={6}>
+                    <CardActionArea>
+                      <CardContent>
+                        <Typography gutterBottom variant="h5" component="ul">
+                          Weight {value.type}:
+                        </Typography>
+                        <Typography variant="li" color="text.secondary" component="li" sx={{ textAlign: "justify" }}>
+                          <Typography variant="h6" component="span" sx={{ fontWeight: "600" }}>  250 grams </Typography> {value.fruit} provides <Typography variant="h6" component="span" sx={{ fontWeight: "600" }}> 500 Calories </Typography>  per day to gain weight <Typography variant="h6" component="span" sx={{ fontWeight: "600" }}>  0.5 kg </Typography>  per week.
+                        </Typography>
+                        <Typography variant="li" color="text.secondary" component="li" sx={{ textAlign: "justify" }}>
+                          {value.fruit} contain <Typography variant="h6" component="span" sx={{ fontWeight: "600" }}>  160-200 calories </Typography>  per {value.grams} grams
+                        </Typography>
+                        <Typography gutterBottom variant="h5" component="ul">
+                          Uses:
+                        </Typography>
+                        <Typography variant="li" color="text.secondary" component="li" >
+                          {value.usesOne}
+                        </Typography>
+                        <Typography variant="li" color="text.secondary" component="li" >
+                          {value.usesTwo}
+                        </Typography>
+                        <Typography variant="li" color="text.secondary" component="li" >
+                          {value.usesThree}
+                        </Typography>
+                        <Typography variant="li" color="text.secondary" component="li" >
+                          {value.usesFour}
+                        </Typography>
+                        <Typography variant="li" color="text.secondary" component="li" >
+                          {value.usesFive}
+                        </Typography>
+                      </CardContent>
+                    </CardActionArea>
+                  </Card>
+                </Grid>
+              </Grid>
+            ))
+          }
+
+        </div>
       </div>
 
-      <div className="bg-green-300 text-black py-8 absolute bottom-0 w-full">
+
+
+      <div className="bg-green-300 text-black py-8    w-full">
         <div className="flex justify-evenly ">
           <div className="">
             <h3 className="text-xl font-bold mb-4">Contact Us</h3>
